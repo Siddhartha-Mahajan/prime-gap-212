@@ -23,11 +23,10 @@ Human correspondence: Siddhartha Mahajan
 Siddhartha Mahajan thanks Paras Chopra, founder of
 [Lossfunk](https://lossfunk.com), for introducing him, during his time as a
 Research Fellow at Lossfunk, to the general research direction of using AI
-systems to attack mathematical problems. He also thanks Lossfunk, a
-Bangalore-based research lab exploring general intelligence—including AI ×
-science and AI × mathematics—for providing the research workspace,
-environment, and GPT access that enabled this project. Siddhartha Mahajan also
-thanks Julia Stadlmann, whose work this manuscript heavily builds upon.
+systems to attack mathematical problems. He also thanks Lossfunk
+for providing the research workspace, environment, and GPT access that enabled
+this project. Siddhartha Mahajan also thanks Julia Stadlmann, whose work this
+manuscript heavily builds upon.
 
 `paper.tex` contains the complete article, including its bibliography;
 `paper.pdf` is the compiled version. Appendix A specifies the finite witness,
