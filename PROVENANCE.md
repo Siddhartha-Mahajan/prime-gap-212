@@ -8,14 +8,14 @@ This file records how the repository artifact was produced. It is intended to pr
 | --- | --- |
 | Generator and repository-artifact author | OpenAI GPT-5.6 Sol (`gpt-5.6-sol`), used in the ChatGPT web interface with Pro reasoning effort |
 | Later review and computational verification | Codex |
-| Human prompter, curator, and releaser | Siddhartha Mahajan |
-| Human correspondence | [siddharthamahajan03@gmail.com](mailto:siddharthamahajan03@gmail.com) |
+| Human prompter, curator, and releaser | Siddhartha Mahajan, Research Fellow at Lossfunk |
+| Human correspondence | Siddhartha Mahajan, Research Fellow at Lossfunk, [siddharthamahajan03@gmail.com](mailto:siddharthamahajan03@gmail.com) |
 
 Official model documentation: <https://developers.openai.com/api/docs/models/gpt-5.6-sol>
 
 ## What Siddhartha Mahajan did
 
-Siddhartha Mahajan supplied the bounded-prime-gaps problem, pointed GPT-5.6 Sol in the ChatGPT web interface to the relevant papers and project resources, and gave brief high-level directions, including asking it to pursue the strongest reduction it could support. He selected the resulting package for public release and later asked Codex to inspect and test it.
+Siddhartha Mahajan, Research Fellow at Lossfunk, supplied the bounded-prime-gaps problem, pointed GPT-5.6 Sol in the ChatGPT web interface to the relevant papers and project resources, and gave brief high-level directions, including asking it to pursue the strongest reduction it could support. He selected the resulting package for public release and later asked Codex to inspect and test it.
 
 Mahajan did **not** independently derive, line-check, or verify the mathematical proof. He did not write the manuscript or verification code. His questions to Codex and his execution of this release workflow are not independent mathematical verification.
 

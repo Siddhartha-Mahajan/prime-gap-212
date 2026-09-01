@@ -4,8 +4,8 @@
 > research artifact. OpenAI GPT-5.6 Sol, running in the ChatGPT web interface
 > with Pro reasoning effort, generated the principal argument, manuscript,
 > and verification code. Codex was used afterward only for package review and
-> computational verification. Siddhartha
-> Mahajan supplied the problem and source materials, gave brief high-level
+> computational verification. Siddhartha Mahajan, Research Fellow at Lossfunk,
+> supplied the problem and source materials, gave brief high-level
 > directions, curated the result, and released it. He did not independently
 > derive or verify the proof. No independent human mathematician has yet
 > verified the analytic argument.
@@ -15,17 +15,17 @@ Repository: <https://github.com/Siddhartha-Mahajan/prime-gap-212>
 See [`PROVENANCE.md`](PROVENANCE.md) and Appendix B of the paper for the full
 attribution and verification status.
 
-Human correspondence: Siddhartha Mahajan
+Human correspondence: Siddhartha Mahajan, Research Fellow at Lossfunk
 ([siddharthamahajan03@gmail.com](mailto:siddharthamahajan03@gmail.com)).
 
 ## Acknowledgments
 
-Siddhartha Mahajan thanks Paras Chopra, founder of
-[Lossfunk](https://lossfunk.com), for introducing him, during his time as a
-Research Fellow at Lossfunk, to the general research direction of using AI
+Siddhartha thanks Paras Chopra, founder
+of [Lossfunk](https://lossfunk.com), for introducing him to the general
+research direction of using AI
 systems to attack mathematical problems. He also thanks Lossfunk, a
 Bangalore-based research lab, for providing the research workspace,
-environment, and GPT access that enabled this project. Siddhartha Mahajan also
+environment, and GPT access that enabled this project. Siddhartha also
 thanks Julia Stadlmann, whose work this manuscript heavily builds upon.
 
 `paper.tex` contains the complete article, including its bibliography;
