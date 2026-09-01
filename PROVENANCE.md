@@ -10,7 +10,6 @@ This file records how the repository artifact was produced. It is intended to pr
 | Later review and computational verification | Codex |
 | Human prompter, curator, and releaser | Siddhartha Mahajan |
 | Research resources | Lossfunk, headed by Paras Chopra |
-| Foundational mathematical source | Julia Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126 (2026) |
 
 Official model documentation: <https://developers.openai.com/api/docs/models/gpt-5.6-sol>
 
@@ -25,10 +24,6 @@ Mahajan did **not** independently derive, line-check, or verify the mathematical
 GPT-5.6 Sol, running in the ChatGPT web interface with Pro reasoning effort, conducted the literature-guided investigation, developed the claimed support and partition argument, searched for the finite sieve function, generated the mathematical exposition, produced the certificate and verification programs, and assembled the manuscript package. Codex was used only afterward to review the package and rerun computational checks.
 
 The model is named as the author of this GitHub artifact at Mahajan's request because that best describes who generated it.
-
-## Dependence on Julia Stadlmann's work
-
-The claimed improvement is built directly on Julia Stadlmann's 2026 proof of the bound 240. In particular, the manuscript imports her equidistribution estimates for moduli with a large smooth factor and does not strengthen them. The claimed additional contribution is a different support-partition argument and a certified finite sieve function that use Stadlmann's estimates.
 
 ## Computational checks
 

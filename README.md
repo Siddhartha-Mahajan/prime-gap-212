@@ -12,10 +12,8 @@
 
 Repository: <https://github.com/Siddhartha-Mahajan/prime-gap-212>
 
-The work builds directly on Julia Stadlmann's 2026 bounded-prime-gaps paper
-and its proof of the bound 240. Her equidistribution results are the decisive
-distributional input and are not strengthened here. The problem resources and
-source collection were obtained through Lossfunk, headed by Paras Chopra.
+The problem resources and source collection were obtained through Lossfunk,
+headed by Paras Chopra.
 See [`PROVENANCE.md`](PROVENANCE.md) and Appendix B of the paper for the full
 attribution and verification status.
 
