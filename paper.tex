@@ -1,0 +1,1073 @@
+\documentclass[11pt,reqno]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array}
+\usepackage{microtype}
+\usepackage[margin=1.05in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={A bound of 212 for gaps between consecutive primes},
+ pdfauthor={OpenAI GPT-5.6 Sol},
+ pdfsubject={Bounded gaps between primes; a computer-assisted proof},
+ pdfkeywords={prime gaps, Maynard-Tao sieve, interval arithmetic}}
+\usepackage{enumitem}
+\setlist[enumerate]{label=\textup{(\roman*)},leftmargin=2.2em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{1em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\Jb}{J_{\mathrm{box}}}
+\newcommand{\Qset}{\mathcal Q}
+\newcommand{\Tset}{\mathcal T}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\tmax}{\tau_0}
+\newcommand{\gmin}{\gamma_-}
+\newcommand{\gmax}{\gamma_+}
+\DeclareMathOperator{\diam}{diam}
+\title[A bound of 212 for prime gaps]{A bound of 212 for gaps between consecutive primes}
+\author{OpenAI GPT-5.6 Sol}
+\thanks{This manuscript is a substantially AI-generated mathematical research
+artifact. Siddhartha Mahajan supplied the problem and source materials, gave
+brief high-level directions, and arranged its release. He did not independently
+derive or verify the mathematical argument. The research and manuscript were
+generated in the ChatGPT web interface by GPT-5.6 Sol using Pro reasoning
+effort; Codex was used afterward only for review and computational verification.
+See Appendix~\ref{app:provenance} for the full provenance and release status.
+The public repository is
+\url{https://github.com/Siddhartha-Mahajan/prime-gap-212}.}
+\date{September 2, 2026}
+\subjclass[2020]{11N05, 11N36}
+\keywords{Bounded prime gaps, Maynard--Tao sieve, distribution in arithmetic progressions, computer-assisted proof}
+
+\begin{document}
+\begin{abstract}
+Building directly on Julia Stadlmann's 2026 breakthrough, which established
+$H_1\le240$, we prove that every admissible $45$-tuple has infinitely many translates
+containing at least two primes. In particular,
+$\liminf_{n\to\infty}(p_{n+1}-p_n)\le 212$.
+Stadlmann's equidistribution estimates for moduli with a large smooth factor
+are the decisive distributional input; those estimates are used without
+strengthening. A three-part partition lemma enlarges
+the permissible support, and a sum of three product weights with separate
+radial profiles supplies the sieve function. Its integrals are reduced to
+finite convolutions and prefix sums. A directed-rounding certificate gives
+$45J_{\mathrm{box}}/I>1.0001949699$; the box numerator is a lower bound for
+the required sieve integral. The exact coefficients and a separately
+implemented verifier are included in the ancillary material and at
+\url{https://github.com/Siddhartha-Mahajan/prime-gap-212}.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+Let $p_n$ denote the $n$th prime, and put
+\[
+ H_1=\liminf_{n\to\infty}(p_{n+1}-p_n).
+\]
+The sieve of Goldston, Pintz and Y{\i}ld{\i}r{\i}m \cite{GPY} provided the
+starting point for the modern theory of small prime gaps. Zhang's
+theorem \cite{Zhang} established that $H_1$ is finite. Maynard's
+multidimensional sieve \cite{Maynard}, together with Tao's independent
+work and the subsequent Polymath project \cite{PolymathSieve}, led to
+$H_1\le246$. Julia Stadlmann \cite{Stadlmann26} obtained $H_1\le240$ by combining
+the epsilon-enlargement of the sieve support with equidistribution
+estimates for moduli having a large smooth factor. These estimates allow
+some nonsmooth factors to remain, provided that they can be allocated to
+appropriate divisor ranges.
+
+We prove the following result.
+\begin{theorem}\label{thm:main}
+One has $H_1\le212$.
+\end{theorem}
+A finite set of integers is \emph{admissible} if it omits a residue class
+modulo every prime. We obtain Theorem~\ref{thm:main} from the stronger
+statement below.
+\begin{theorem}\label{thm:tuples}
+Let $\{h_1,\ldots,h_{45}\}$ be an admissible set of distinct integers.
+There are infinitely many integers $n$ for which at least two of
+$n+h_1,\ldots,n+h_{45}$ are prime.
+\end{theorem}
+
+There are two ingredients beyond the sieve and distribution estimates
+of \cite{Stadlmann26}. The first is a partition argument for the
+logarithms of the nonsmooth factors. The support is described by four
+bounds: one for a single large coordinate, one for two, one for three,
+and one for four or more. We retain the dependence between the available
+divisor capacities, rather than replacing each capacity by its separate
+minimum. This gives a uniform three-part partition in the most
+restrictive Type~II range. A direct factorization argument retains a
+positive auxiliary slack throughout this range.
+
+The second ingredient is the choice and evaluation of the sieve
+function. We use three product weights, each multiplied by a function of
+the sum of the coordinates. After restricting this function to a union
+of boxes, both quadratic forms can be expressed through one-dimensional
+convolutions. The function on this union is a finite, exactly specified
+object. In particular, the proof does not require an error estimate for
+approximating an unspecified continuous optimizer, nor does it require
+certifying an eigenvalue calculation.
+
+The distribution theorems themselves are not strengthened here. We use
+Lemmas~3--7 of \cite{Stadlmann26}, which extend estimates from
+\cite{BakerIrving,PolymathDistribution,Stadlmann25}. The role of the new
+partition lemma is to place a larger family of moduli within their
+hypotheses. We work with the prime indicator, so that no loss from a
+prime minorant enters the variational inequality.
+
+Sections~\ref{sec:sieve}--\ref{sec:distribution} establish the permissible
+support. Section~\ref{sec:discrete} gives the finite quadratic forms.
+Section~\ref{sec:certificate} records the certificate and proves the two
+theorems. The finite certificate is specified in Appendix~\ref{app:certificate},
+and the generation history and release status are recorded in
+Appendix~\ref{app:provenance}.
+
+\subsection{Notation}
+All integrals are Lebesgue integrals. A list may be empty; its sum is then
+zero. The entries in the lists used for factorization are real numbers.
+We write $P(x)=\prod_{p<x}p$, and say that an integer is $x^\delta$-smooth
+if all of its prime factors are less than $x^\delta$. All moduli to which
+we apply a distribution estimate are squarefree. The parameters
+$\varepsilon$, $\eta$, $\varepsilon_0$, and $\tau$ have different roles:
+$\varepsilon$ enlarges the sieve support, $\eta=10^{-10}$ is the tolerance
+in the convolution decomposition, $\varepsilon_0$ contracts the support
+when sieve weights are constructed, and $\tau>0$ is the auxiliary
+parameter in the distribution estimates.
+
+\section{The sieve criterion}\label{sec:sieve}
+Let $k\ge2$, and suppose that
+\begin{equation}\label{eq:support-conditions}
+ 0<\varepsilon<A<\frac12-\varepsilon,\qquad
+ 0<\delta<B_m\le B_{m+1}\le B_m+\delta\quad(m\ge1),\quad B_1<1.
+\end{equation}
+For $\mathbf t=(t_1,\ldots,t_k)\in[0,\infty)^k$, define
+\[
+ r(\mathbf t)=\#\{i:t_i>\delta\}.
+\]
+We use the support
+\begin{equation}\label{eq:support}
+ \Tset_k=\left\{\mathbf t\in[0,\infty)^k:\ \sum_i t_i<A+\varepsilon,\quad
+ \sum_{i:t_i>\delta}t_i\le B_{r(\mathbf t)}\right\},
+\end{equation}
+where the second condition is omitted when $r(\mathbf t)=0$.
+This is the one-layer case of \cite[Definition~1]{Stadlmann26}, with
+$\underline A=(-\varepsilon,A)$.
+
+A useful consequence of \eqref{eq:support-conditions} is the following
+inheritance property. If a list of $r$ numbers, all at least $\delta$,
+has sum at most $B_r$, then every sublist of $j$ numbers has sum at most
+$B_j$. Indeed, deleting $r-j$ entries decreases the sum by at least
+$(r-j)\delta$, whereas
+\begin{equation}\label{eq:inheritance}
+ B_r\le B_j+(r-j)\delta.
+\end{equation}
+In particular, each coordinate of \eqref{eq:support} is at most $B_1$,
+apart from immaterial boundary conventions.
+
+For a symmetric real function $F\in L^2(\Tset_k)$, extended by zero, set
+\begin{align}
+ I(F)&=\int_{[0,\infty)^k} F(\mathbf t)^2\dd\mathbf t,
+       \label{eq:I}\\
+ J(F)&=\int_{\substack{\mathbf t\in[0,\infty)^{k-1}\\
+                  t_1+\cdots+t_{k-1}\le A-\varepsilon}}
+       \left(\int_0^\infty F(\mathbf t,u)\dd u\right)^2
+       \dd\mathbf t.\label{eq:J}
+\end{align}
+
+We specify the required family of moduli. For $0<\varepsilon_0<1$, let
+$\Qset(x;\varepsilon_0)$ consist of the squarefree integers admitting a
+factorization
+\begin{equation}\label{eq:qfactor}
+ q=ee'\prod_{i=1}^{m}f_i\prod_{i=1}^{m'}f'_i
+\end{equation}
+such that $ee'$ is $x^\delta$-smooth, $\log_x f_i,\log_x f'_i\ge\delta$,
+and
+\begin{align}
+ \log_x\prod_i f_i&\le(1-\varepsilon_0)B_m,&
+ \log_x\prod_i f'_i&\le(1-\varepsilon_0)B_{m'},\label{eq:qcaps}\\
+ \log_x\left(e\prod_i f_i\right)&\le(1-\varepsilon_0)(A-\varepsilon),&
+ \log_x\left(e'\prod_i f'_i\right)&\le(1-\varepsilon_0)(A+\varepsilon).
+ \label{eq:qtotals}
+\end{align}
+A condition on an empty product in \eqref{eq:qcaps} is omitted. Thus
+\begin{equation}\label{eq:qmaximum}
+ q\le x^{2A(1-\varepsilon_0)}.
+\end{equation}
+This is the squarefree part of the one-layer family in
+\cite[Definition~2]{Stadlmann26}.
+
+For a function $f(n;x)$ write
+\[
+ E_f(x;q,a)=\sum_{\substack{x\le n\le2x\\n\equiv a\pmod q}}f(n;x)
+ -\frac1{\phi(q)}\sum_{\substack{x\le n\le2x\\(n,q)=1}}f(n;x).
+\]
+The distribution statement needed below is
+\begin{equation}\label{eq:prime-distribution}
+ \sum_{q\in\Qset(x;\varepsilon_0)}|E_{\ind_\PP}(x;q,a)|
+ \ll_{C,\varepsilon_0}\frac{x}{(\log x)^C}
+ \qquad\text{for every }C>0,
+\end{equation}
+with the residue convention $(a,P(x))=1$ of
+\cite[Definition~3]{Stadlmann26}.
+
+\begin{proposition}[One-layer sieve criterion]\label{prop:sieve}
+Suppose \eqref{eq:support-conditions} and
+\eqref{eq:prime-distribution} hold. If a symmetric real
+$F\in L^2(\Tset_k)$ satisfies
+\begin{equation}\label{eq:sieve-threshold}
+ kJ(F)>I(F)>0,
+\end{equation}
+then every admissible $k$-tuple has infinitely many translates
+containing at least two primes.
+\end{proposition}
+\begin{proof}
+Apply \cite[Proposition~1 and its proof]{Stadlmann26} with one support
+layer and $\rho=\ind_\PP$. The minorant parameters are $c_1=c_2=0$.
+The roughness condition is automatic for the prime indicator, and its
+mean is supplied by the prime number theorem. In the one-layer case the
+integrals in that proposition are exactly \eqref{eq:I} and
+\eqref{eq:J}. The sieve argument applies to any fixed admissible tuple.
+
+The stated $L^2$ formulation includes nonsmooth functions. One can also
+see the relevant continuity directly: integration in the last coordinate
+has squared operator norm at most $B_1$, by Cauchy--Schwarz. Hence $J$ is
+continuous on $L^2(\Tset_k)$. The contraction and smooth approximation in
+\cite[Lemma~1]{Stadlmann26} therefore preserve the strict inequality
+\eqref{eq:sieve-threshold}.
+\end{proof}
+
+\section{Partition lemmas}\label{sec:partition}
+The next two lemmas concern two lists of positive real numbers. A
+$j$-subsum means the sum of any $j$ distinct entries from one list, not
+necessarily consecutive entries.
+
+\begin{lemma}\label{lem:two-bins}
+Let $0<b_1\le b_2\le b_3$, and suppose that every $j$-subsum of either
+of two lists is at most $b_j$, for $1\le j\le3$. Let $a,c>0$ satisfy
+\begin{equation}\label{eq:large-items}
+ 2b_1\le a,\qquad \frac52b_2\le a+c,\qquad b_3\le3c.
+\end{equation}
+The sum of all entries exceeding $c$ is at most $a$. Moreover, if the
+combined total is $M$ and $2(M-a)\le c$, the entries can be partitioned
+into parts of sums at most $a$ and $c$.
+\end{lemma}
+\begin{proof}
+There are at most two entries exceeding $c$ in each list, since three
+such entries would have sum greater than $b_3$. If each list has at most
+one, their combined sum is at most $2b_1\le a$. Otherwise one list has
+two entries exceeding $c$, so $c<b_2/2$. The sum of all entries exceeding
+$c$ is then at most $2b_2$, and
+\[
+ a\ge\frac52b_2-c>2b_2.
+\]
+This proves the first assertion.
+
+If $M\le a$, there is nothing to prove. Otherwise put $R=M-a>0$.
+An entry in $[R,c]$ can be placed in the second part on its own. If no
+such entry exists, every entry at most $c$ is less than $R$. The first
+assertion implies that these smaller entries have total at least $R$.
+Accumulate them until their sum first reaches $R$. The resulting sum is
+less than $2R\le c$, and the sum of the remaining entries is at most $a$.
+\end{proof}
+
+\begin{lemma}[Three-part partition]\label{lem:three-bins}
+Let $0<\delta<b_1\le b_2\le b_3\le B$. Suppose that all entries in
+two lists are at least $\delta$, each list has total at most $B$, and
+every $j$-subsum of either list is at most $b_j$, for $1\le j\le3$.
+Let $a,c,d>0$, and put $c'=\max(c,d)$, $d'=\min(c,d)$.
+Suppose that
+\begin{align}
+ 2b_1&\le a,& \frac52b_2&\le a+c',& b_3&\le3c',\label{eq:three-one}\\
+ 2B&\le a+d',& 4B&\le2a+c'+2\delta.\label{eq:three-two}
+\end{align}
+Then the entries can be partitioned into three parts of sums at most
+$a,c,d$, respectively.
+\end{lemma}
+\begin{proof}
+Let $M$ be the combined total. We may assume that $M>a$.
+Suppose first that there is an entry $y\le d'$. Place $y$ in the part of
+capacity $d'$. Deleting this entry preserves all the subsum conditions.
+The remaining total $M'=M-y$ satisfies
+\[
+ 2(M'-a)\le 2(2B-\delta-a)\le c'.
+\]
+Lemma~\ref{lem:two-bins} partitions the remaining entries into the parts
+of capacities $a$ and $c'$.
+
+If there is no entry at most $d'$, then every entry exceeds $d'$.
+By \eqref{eq:three-two}, $R=M-a\le2B-a\le d'$. By the first assertion of
+Lemma~\ref{lem:two-bins}, the entries exceeding $c'$ have total at most
+$a$. Since $M>a$, some entry is at most $c'$. This entry is greater than
+$d'\ge R$, so placing it in the part of capacity $c'$ leaves total at
+most $a$. The part of capacity $d'$ is empty.
+\end{proof}
+
+For completeness, we record the elementary fact used to turn a partition
+of the large factors into a factorization of the modulus.
+\begin{lemma}[Filling an interval]\label{lem:fill}
+Let $z_1,\ldots,z_s\in(0,\delta)$, and let $Y\ge0$.
+If $U-L\ge\delta$, $Y\le U$, and $Y+\sum_i z_i\ge L$, some sublist has
+sum $Z$ with $Y+Z\in[L,U]$. If instead $Y<U$ and
+$Y+\sum_i z_i>L$, one can obtain $Y+Z\in(L,U)$ whenever $U-L>\delta$.
+\end{lemma}
+\begin{proof}
+If the initial value is already in the desired interval, use the empty
+sublist. Otherwise add entries until the lower endpoint is first reached,
+or strictly exceeded in the open-interval version. The last increment is
+less than $\delta$.
+\end{proof}
+
+\section{The critical divisor factorization}\label{sec:factorization}
+We now fix the parameters used in the proof. All entries in the following
+display are exact:
+\begin{equation}\label{eq:parameters}
+\begin{gathered}
+ k=45,\qquad
+ A=\frac{16862}{65536},\quad
+ \varepsilon=\frac{557}{65536},\quad
+ \delta=\frac{1019}{65536},\\
+ b_1=\frac{10171}{65536},\quad
+ b_2=\frac{10378}{65536},\quad
+ b_3=\frac{11321}{65536},\quad
+ B=\frac{12082}{65536},\\
+ B_1=b_1,\qquad B_2=b_2,\qquad B_3=b_3,\qquad B_m=B\quad(m\ge4),\\
+ \xi_1=\frac{19}{50},\qquad \xi_2=\xi_3=\frac25,\qquad
+ \eta=10^{-10},\quad \tmax=10^{-8},\quad \zeta=10^{-6}.
+\end{gathered}
+\end{equation}
+These parameters satisfy \eqref{eq:support-conditions}. Put
+\begin{equation}\label{eq:gamma-parameters}
+\begin{gathered}
+ \omega=A-\frac14=\frac{239}{32768},\qquad
+ G=\frac13+8\omega+\frac73\delta=\frac{28047}{65536},\\
+ \gmin=\xi_2-\eta,\qquad \gmax=G+3\eta.
+\end{gathered}
+\end{equation}
+We will take $\tau>0$ sufficiently small, always with $\tau\le\tmax$.
+Define
+\begin{align}
+ \alpha&=\gmin-2\delta-8\omega-61\tmax,\label{eq:alpha}\\
+ S&=\frac12-2\delta-10\omega-68\tmax,\label{eq:S}\\
+ C_*&=\max\left(\frac12-\gmax-2\omega-7\tmax,
+                    \frac45\left(\frac12-\gmax\right)\right).
+                    \label{eq:Cstar}
+\end{align}
+Direct rational comparison gives
+\begin{align}
+ 2b_1&<\alpha,& \frac52b_2&<S,& b_3&<3C_*,\label{eq:uniform-one}\\
+ 2B&<S,& 2B&<\gmin-2\delta-4\tmax,&
+ 4B&<S+\alpha+2\delta.\label{eq:uniform-two}
+\end{align}
+Quantitative margins are listed in Appendix~\ref{app:margins}.
+
+\begin{proposition}\label{prop:critical-factor}
+Let $q\in\Qset(x;\varepsilon_0)$ satisfy $q\ge x^{1/2-2\tau}$.
+For every $\gamma\in[\gmin,\gmax]$, there are divisors $r\mid q$,
+$u\mid q/r$, and $d_1\mid r$ such that, with $\delta_* =\delta+\zeta$,
+\begin{align}
+ x^{\gamma-3\tau-\delta_*}&<r<x^{\gamma-3\tau},\label{eq:r-window}\\
+ x^{1-\gamma-6\tau-\delta_*}q^{-1}&<u<
+                 x^{1-\gamma-6\tau}q^{-1},\label{eq:u-window}\\
+ r^2x^{2-\gamma-52\tau-\delta_*}q^{-4}&<d_1<
+                 r^2x^{2-\gamma-52\tau}q^{-4}.\label{eq:d-window}
+\end{align}
+\end{proposition}
+\begin{proof}
+Write $q=x^{1/2+2\omega_0}$ exactly. By \eqref{eq:qmaximum},
+$-\tau\le\omega_0\le\omega$. Apply the inheritance property
+\eqref{eq:inheritance} to the two lists of logarithms in
+\eqref{eq:qfactor}. Each list has total at most $B$, and its $j$-subsums
+are bounded by $b_j$ for $1\le j\le3$.
+
+Set
+\begin{equation}\label{eq:capacities}
+ a=\gamma-2\delta-8\omega_0-61\tau,\qquad
+ c=\frac12-\gamma-2\omega_0-7\tau,\qquad
+ d=8\omega_0+57\tau.
+\end{equation}
+These numbers are positive; in particular $d\ge49\tau$.
+Writing $c'=\max(c,d)$ and $d'=\min(c,d)$, we have
+\begin{gather}
+ a\ge\alpha,\qquad a+c\ge S,\qquad
+ a+d=\gamma-2\delta-4\tau\ge\gmin-2\delta-4\tmax,
+ \label{eq:capacity-sums}\\
+ c'\ge c\ge\frac12-\gmax-2\omega-7\tmax,\qquad
+ c'\ge\frac{4c+d}{5}
+      =\frac45\left(\frac12-\gamma\right)+\frac{29}{5}\tau.
+ \label{eq:capacity-max}
+\end{gather}
+Thus $c'\ge C_*$. Moreover
+\[
+ a+d'=\min(a+c,a+d),\qquad
+ 2a+c'\ge a+(a+c)\ge\alpha+S.
+\]
+Equations~\eqref{eq:uniform-one}--\eqref{eq:uniform-two} verify all
+hypotheses of Lemma~\ref{lem:three-bins}. We obtain three parts of the
+large logarithms with respective sums
+\begin{equation}\label{eq:Yparts}
+ Y_1\le a,\qquad Y_2\le c,\qquad Y_4\le d.
+\end{equation}
+The indices $1,2,4$ identify their roles in the factorization; no fourth
+nonempty part is used.
+
+Write the prime-factor logarithms of the smooth part $ee'$ as
+$z_1,\ldots,z_s\in(0,\delta)$, and put
+\begin{align*}
+ \ell_1&=\gamma-4\tau-\delta,&u_1&=\gamma-4\tau,\\
+ \ell_2&=\frac12-\gamma-2\omega_0-7\tau-\delta,&u_2&=c,\\
+ \ell_3&=-\gamma-8\omega_0-53\tau-\delta,&
+ u_3&=-\gamma-8\omega_0-53\tau.
+\end{align*}
+Each interval has length $\delta$, and
+\begin{equation}\label{eq:window-identities}
+ 2\ell_1+u_3=a,\qquad
+ \ell_1-2u_1-\ell_3=d,\qquad
+ a+d=\gamma-2\delta-4\tau.
+\end{equation}
+
+First construct $u$ from the large factors in the second part and some
+smooth primes. The initial logarithm is at most $u_2$, and the total
+available logarithm exceeds $\ell_2$, since
+\[
+ \frac12+2\omega_0-(a+d)-\ell_2
+   =4\omega_0+3\delta+11\tau\ge3\delta+7\tau>0.
+\]
+Lemma~\ref{lem:fill} gives $\log_xu\in[\ell_2,u_2]$.
+Next construct $r$ from the large factors in the first and third parts
+and some of the remaining smooth primes. Their initial logarithm is
+at most $a+d=u_1-2\delta$, and the total available logarithm is at least
+\[
+ \frac12+2\omega_0-u_2=\gamma+4\omega_0+7\tau
+ \ge\gamma+3\tau>\ell_1.
+\]
+Thus $v=\log_xr\in[\ell_1,u_1]$ can be obtained.
+
+Finally, use the large factors in the first part and smooth primes
+already selected for $r$. The initial logarithm is at most
+$a=2\ell_1+u_3\le2v+u_3$, while the total available logarithm is at least
+\[
+ v-Y_4\ge\ell_1-d=2u_1+\ell_3\ge2v+\ell_3.
+\]
+A further application of Lemma~\ref{lem:fill} gives a divisor $d_1\mid r$
+with
+\[
+ 2v+\ell_3\le\log_xd_1\le2v+u_3.
+\]
+All selections use disjoint prime factors where required, since $q$ is
+squarefree.
+
+The three closed intervals just constructed lie strictly inside the
+intervals \eqref{eq:r-window}--\eqref{eq:d-window}. In each comparison
+the lower-endpoint slack is $\zeta-\tau>0$ and the upper-endpoint slack
+is $\tau>0$. This proves the proposition.
+\end{proof}
+
+\section{Verification of the distribution hypotheses}\label{sec:distribution}
+We use the coefficient-sequence and Siegel--Walfisz conventions of
+\cite[Definitions~6--9]{Stadlmann26}. In particular,
+$\HH(\xi_1,\xi_2,\xi_3)$ denotes the convolution family in Definition~9
+of that paper. Its Type~I sequences have a smooth factor at scale
+$x^\gamma$ with $\gamma\ge\xi_1-\eta$. Its Type~II sequences have two
+Siegel--Walfisz factors, one at scale $x^\gamma$ with
+$\xi_2-\eta\le\gamma\le1-\xi_2+\eta$. The Type~III scales satisfy the
+conditions in that definition. We retain all of its coefficient bounds
+and uniformity conventions.
+
+\begin{proposition}\label{prop:distribution}
+The parameters \eqref{eq:parameters} satisfy
+\eqref{eq:prime-distribution}.
+\end{proposition}
+\begin{proof}
+Fix $\varepsilon_0>0$ and a required logarithmic saving. Choose $\tau>0$
+sufficiently small for the distribution estimates below, with
+$\tau\le\tmax$. The subfamily $q<x^{1/2-2\tau}$ is covered directly,
+for the prime indicator, by the Bombieri--Vinogradov theorem. We therefore
+work on
+\[
+ \Qset^+=\{q\in\Qset(x;\varepsilon_0):q\ge x^{1/2-2\tau}\}.
+\]
+The logarithms of all large factors have combined sum $M\le2B$.
+The smooth prime logarithms are less than $\delta$, and the total
+logarithm of $q$ is at least $1/2-2\tau$.
+
+We verify the divisor conditions of
+\cite[Lemmas~3--7]{Stadlmann26}. All inequalities used for this purpose
+are strict. The numerical comparisons in this proof are rational
+comparisons, not floating-point tests; the exact checks are recorded in
+Appendix~\ref{app:certificate}.
+
+\subsection*{Type I}
+Suppose first that $\xi_1-\eta\le\gamma\le1/2$. Set
+\[
+ \Delta_I(\gamma)=\gamma-4\omega-\frac13-\eta.
+\]
+Then
+\[
+ \Delta_I(\gamma)>\delta,\qquad
+ 3\gamma-12\omega-3\Delta_I(\gamma)=1+3\eta>1.
+\]
+To apply \cite[Lemma~5]{Stadlmann26}, we require a divisor with logarithm
+in
+\[
+ (\gamma-3\tau-\Delta_I(\gamma),\ \gamma-3\tau).
+\]
+Put all large factors in this divisor and fill with smooth primes.
+The initial logarithm is strictly less than the upper endpoint, because
+\begin{equation}\label{eq:I-cap}
+ 2B<\xi_1-\eta-3\tmax.
+\end{equation}
+The total available logarithm exceeds the lower endpoint, since
+\[
+ \frac12-2\tau-\bigl(\gamma-3\tau-\Delta_I(\gamma)\bigr)
+ =\frac16-4\omega-\eta+\tau>0.
+\]
+Lemma~\ref{lem:fill} supplies the required divisor.
+
+For $1/2<\gamma\le1/2+2\omega+\tau$, use
+\[
+ \Delta_{I,h}=\frac{1-68\omega}{14}-\eta>\delta.
+\]
+Now $68\omega+14\Delta_{I,h}=1-14\eta<1$, and the required interval is
+\[
+ (1-\gamma-3\tau-\Delta_{I,h},\ 1-\gamma-3\tau).
+\]
+The same construction works: its upper endpoint exceeds $2B$, by
+$2B<1/2-2\omega-4\tmax$, and the total logarithm exceeds its lower
+endpoint. For $\gamma>1/2+2\omega+\tau$, the last case of
+\cite[Lemma~5]{Stadlmann26} requires no divisor condition.
+
+\subsection*{Type IIa and Type IIb}
+Normalize the auxiliary scales so that $MN=x$; this changes $M$ by
+only a bounded factor and preserves the coefficient-sequence and
+Siegel--Walfisz properties. Interchange the two factors when necessary,
+so that the smaller scale has exponent at most $1/2$, as in
+\cite[Section~4.3, Case~II]{Stadlmann26}. Put
+\begin{equation}\label{eq:K}
+ K=\frac25+\frac{24}{5}\omega+\frac75\delta
+   =\frac{149677}{327680}.
+\end{equation}
+For $\gamma\ge K+2\eta$, set
+\[
+ \Delta_a(\gamma)=\frac{5\gamma-2-24\omega}{7}-\eta.
+\]
+One has $\Delta_a(\gamma)-\delta\ge3\eta/7>0$, and
+\begin{align*}
+ 24\omega+7\Delta_a(\gamma)-5\gamma&=-2-7\eta<-2,\\
+ 8\omega+3\Delta_a(\gamma)-\gamma
+   &=\frac{8\gamma-6-16\omega}{7}-3\eta<0.
+\end{align*}
+These are the scalar conditions of \cite[Lemma~3]{Stadlmann26}.
+The divisor interval has logarithmic endpoints
+$\gamma-3\tau-\Delta_a(\gamma)$ and $\gamma-3\tau$.
+Again include all large factors and fill with smooth primes. The upper
+endpoint exceeds $2B$, while
+\[
+ \frac12-2\tau-\bigl(\gamma-3\tau-\Delta_a(\gamma)\bigr)
+ \ge\frac1{14}-\frac{24}{7}\omega-\eta+\tau>0.
+\]
+
+For $G+3\eta<\gamma<K+2\eta$, put
+\[
+ \Delta_b(\gamma)=\frac{3\gamma-1-24\omega}{7}-\eta.
+\]
+Then $\Delta_b(\gamma)-\delta>2\eta/7$, and
+\begin{align*}
+ 24\omega+7\Delta_b(\gamma)-3\gamma&=-1-7\eta<-1,\\
+ 8\omega+3\Delta_b(\gamma)-\gamma
+   &=\frac{2\gamma-3-16\omega}{7}-3\eta<0.
+\end{align*}
+We apply \cite[Lemma~4]{Stadlmann26}. Choose $u$ using only smooth primes,
+with logarithm in
+\[
+ \left(\frac12-\gamma-2\omega-6\tau-\Delta_b(\gamma),\
+       \frac12-\gamma-2\omega-6\tau\right).
+\]
+The upper endpoint is positive, and the smooth mass exceeds even that
+upper endpoint: it is enough to check
+\begin{equation}\label{eq:IIb-smooth}
+ G+2\omega-2B-2\tmax>0.
+\end{equation}
+Next choose $r$, coprime to $u$, containing all large factors, with
+logarithm in
+\[
+ (\gamma-3\tau-\Delta_b(\gamma),\ \gamma-3\tau).
+\]
+Its initial logarithm is below the upper endpoint, by
+$2B<G+3\eta-3\tmax$. The remaining logarithm exceeds the lower endpoint,
+since
+\[
+ \log_x(q/u)>\gamma+2\omega+4\tau
+             >\gamma-3\tau-\Delta_b(\gamma).
+\]
+Lemma~\ref{lem:fill} therefore produces both divisors.
+
+\subsection*{Type IIc}
+It remains to consider $\gmin\le\gamma\le\gmax$.
+With $\delta_* =\delta+\zeta$, exact comparison gives
+\begin{align}
+ 1-8\omega-4\delta_*-2\gmax&>0.02352,\label{eq:IIc-scalar-a}\\
+ \gmin-32\omega-10\delta_*&>0.01110,\label{eq:IIc-scalar-b}\\
+ 4\gmin-1-48\omega-16\delta_*&>0.00110.\label{eq:IIc-scalar-c}
+\end{align}
+Thus all three scalar hypotheses of
+\cite[Lemma~6]{Stadlmann26} hold throughout the interval. The required
+divisors are exactly those in
+Proposition~\ref{prop:critical-factor}. Notice that its argument includes
+$-\tau\le\omega_0<0$ as well as $\omega_0\ge0$.
+
+\subsection*{Type III}
+Use the scale parameter $\gamma_3=\xi_3+\eta$ and put
+\begin{equation}\label{eq:III-delta}
+ \Delta_3=\frac12-\frac72\omega-\frac98\gamma_3-\eta.
+\end{equation}
+Then $\Delta_3>\delta$ and
+\[
+ 28\omega+9\gamma_3+8\Delta_3=4-8\eta<4.
+\]
+The Type~III scales in $\HH(\xi_1,\xi_2,\xi_3)$ satisfy the scale
+conditions of \cite[Lemma~7]{Stadlmann26} with $\gamma_3$.
+Set
+\begin{equation}\label{eq:III-window}
+ U_3=\frac13+\frac43\Delta_3-\frac43\omega,\qquad L_3=U_3-\Delta_3.
+\end{equation}
+That lemma requires a divisor with logarithm in $(L_3,U_3)$.
+If $M<U_3$, place all large factors in the divisor. If $M\ge U_3$,
+exclude any one large factor. Its logarithm lies in $[\delta,b_1]$, so
+the logarithm of the remaining large factors is at most $2B-\delta<U_3$.
+In either case the available total logarithm exceeds $L_3$, since
+\begin{equation}\label{eq:III-cap}
+ U_3-(2B-\delta)>0.00307,\qquad
+ \frac12-2\tmax-b_1-L_3>0.01303.
+\end{equation}
+Fill with smooth primes and apply Lemma~\ref{lem:fill}.
+
+\subsection*{Passage to primes}
+We have obtained the required distribution estimate on $\Qset^+$ for
+every convolution in $\HH(\xi_1,\xi_2,\xi_3)$. The constants and auxiliary
+parameters can be chosen uniformly on the indicated ranges: the scalar
+inequalities have positive margins, and the cutoff ranges have the
+fixed tolerance $\eta$. The bound \eqref{eq:qmaximum} places every
+modulus within $x^{1/2+2\omega}$.
+
+The parameters satisfy
+\[
+ 2\xi_1+3\xi_2<2,\quad \xi_2\le\xi_3,\quad
+ \xi_1+9\xi_2<4,\quad 2\xi_1+\xi_2>1,\quad17\xi_2<7.
+\]
+Apply the decomposition of \cite[Proposition~2]{Stadlmann26} to
+$\Qset^+$. Its proof applies to this restricted subfamily: the
+convolution decomposition does not depend on the modulus, and its error
+estimates are sums of absolute discrepancies, so restricting the outer
+sum preserves every estimate. Since $\xi_2=2/5$, the two discarded sums
+in that proposition are empty and $\rho=\ind_\PP$. Indeed, in the first
+sum two exponents strictly greater than $1/5$ would have sum less than
+$2/5$; in the second an exponent would have to lie strictly between
+$1/5$ and $1/5$. There is consequently no mass loss and no negative
+minorant term. This proves \eqref{eq:prime-distribution} on $\Qset^+$.
+Combining it with Bombieri--Vinogradov on the smaller moduli completes
+the proof.
+\end{proof}
+
+\section{A finite sieve function}\label{sec:discrete}
+We next give an exact discretization for evaluating \eqref{eq:I} and a
+lower bound for \eqref{eq:J}. The formulas in this section apply to any
+parameters satisfying \eqref{eq:support-conditions} that are integral
+multiples of a mesh $d>0$, with the index ranges below nonempty.
+For definiteness, assume $1\le D<C_1\le N+1$ and $0\le M_0\le N$.
+
+Write
+\begin{equation}\label{eq:integer-parameters}
+\begin{gathered}
+ D=\delta/d,\quad C_r=B_r/d,\quad
+ T=(A+\varepsilon)/d,\quad L=(A-\varepsilon)/d,\\
+ N=T-k,\qquad M_0=L-(k-1).
+\end{gathered}
+\end{equation}
+For $a\ge0$ let $Q_a=[ad,(a+1)d)$. A box
+$Q_{a_1}\times\cdots\times Q_{a_k}$ is retained if
+\begin{equation}\label{eq:allowed-box}
+ s=\sum_i a_i\le N,\qquad z+r\le C_r,
+ \quad r=\#\{i:a_i\ge D\},\quad z=\sum_{a_i\ge D}a_i,
+\end{equation}
+where the second condition is omitted for $r=0$.
+Every retained box lies in $\Tset_k$ up to a null set. The use of upper
+endpoints in \eqref{eq:allowed-box} is important: a retained box is not
+merely a box whose centre lies in the support.
+
+Fix positive arrays $g_\ell(a)$ and real arrays $h_\ell(s)$, with
+$0\le\ell<R$ and $0\le a,s\le N$. On a retained box define
+\begin{equation}\label{eq:finite-F}
+ F(t_1,\ldots,t_k)=
+ \sum_{\ell=0}^{R-1}h_\ell(s)\prod_{i=1}^k g_\ell(a_i),
+\end{equation}
+and set $F=0$ elsewhere. This function is symmetric, bounded, and
+square-integrable. No sign condition is imposed on the radial arrays.
+
+\subsection{Convolution coefficients}
+For $0\le\ell,m<R$, put
+\[
+ q_{\ell m}(a)=d\,g_\ell(a)g_m(a).
+\]
+Let $q^{\mathrm s}_{\ell m}$ be its restriction to $0\le a<D$, extended
+by zero, and let $q^{\mathrm l}_{\ell m}$ be its restriction to
+$D\le a<C_1$. The latter truncation is legitimate by
+\eqref{eq:inheritance}. Define
+\begin{align}
+ P^{\ell m}_j&=(q^{\mathrm s}_{\ell m})^{*j},&
+ P^{\ell m}_0(s)&=\ind_{s=0},\label{eq:small-powers}\\
+ Q^{\ell m}_0(z)&=\ind_{z=0},&
+ Q^{\ell m}_r(z)&=\ind_{z\le C_r-r}
+             (Q^{\ell m}_{r-1}*q^{\mathrm l}_{\ell m})(z).
+             \label{eq:large-powers}
+\end{align}
+Here $*$ denotes convolution of sequences indexed by the nonnegative
+integers. In every calculation coefficients beyond the largest needed
+index are discarded.
+
+The truncation after each convolution in \eqref{eq:large-powers} loses
+no term that could contribute at a later stage. Indeed, for $r\ge2$,
+if $r$ large indices have sum $z\le C_r-r$, deleting an index at least $D$ leaves sum
+at most
+\[
+ C_r-r-D\le C_{r-1}-r<C_{r-1}-(r-1).
+\]
+This uses $C_r-C_{r-1}\le D$. Iterating the argument reduces to $r=1$,
+where the cap is $C_1-1$. It also shows directly that the individual
+large indices are less than $C_1$.
+
+\begin{proposition}\label{prop:finite-norm}
+For the function \eqref{eq:finite-F},
+\begin{equation}\label{eq:finite-I}
+ I(F)=\sum_{\ell,m=0}^{R-1}\sum_{s=0}^{N}h_\ell(s)h_m(s)
+       \sum_{r=0}^{k}\binom{k}{r}
+       (P^{\ell m}_{k-r}*Q^{\ell m}_r)(s).
+\end{equation}
+Only values $r\le\min(k,\lfloor B/\delta\rfloor)$ can contribute when
+$B_r\le B$.
+\end{proposition}
+\begin{proof}
+Expand the square in \eqref{eq:finite-F}. Select the $r$ large
+coordinates in $\binom{k}{r}$ ways. Their index sum is recorded by
+$Q_r^{\ell m}$, and the sum of the remaining indices by
+$P_{k-r}^{\ell m}$. Each factor $q_{\ell m}$ includes one factor $d$,
+so the product already includes the volume $d^k$ of the box. Summing
+over all retained boxes proves the formula.
+\end{proof}
+
+\subsection{The box numerator}
+In the $(k-1)$ common coordinates of \eqref{eq:J}, retain only boxes
+whose upper-endpoint sum is at most $A-\varepsilon$. Their index sum is
+therefore at most $M_0$. Let $\Jb(F)$ be the integral in \eqref{eq:J}
+over this union of common-coordinate boxes, with the inner fiber
+integral left unchanged. Since the integrand is a square,
+\begin{equation}\label{eq:box-lower}
+ 0\le\Jb(F)\le J(F).
+\end{equation}
+
+For a common-coordinate box with $s\le M_0$, large-coordinate count $r$,
+and large index sum $z$, first impose the inherited cap $z+r\le C_r$
+when $r>0$. A box failing this cap has an empty fiber. For a box satisfying
+it, the allowed last-coordinate indices are exactly
+$0\le a\le u(s,z,r)$, where
+\begin{equation}\label{eq:fiber-cutoff}
+ u(s,z,r)=\min\bigl(N-s,\ \max(D-1,C_{r+1}-r-1-z)\bigr).
+\end{equation}
+This follows by considering separately a small last coordinate and a
+large last coordinate. Define the fiber prefixes
+\begin{equation}\label{eq:prefix}
+ H_\ell(s,u)=\sum_{a=0}^{u}g_\ell(a)h_\ell(s+a).
+\end{equation}
+
+\begin{proposition}\label{prop:finite-J}
+For $F$ in \eqref{eq:finite-F},
+\begin{multline}\label{eq:finite-J}
+ \Jb(F)=d^2\sum_{\ell,m=0}^{R-1}\sum_{s=0}^{M_0}\sum_{r=0}^{k-1}
+ \binom{k-1}{r}\sum_{z\ge0}
+ Q^{\ell m}_r(z)P^{\ell m}_{k-1-r}(s-z)\\
+ {}
+ \cdot H_\ell\bigl(s,u(s,z,r)\bigr)
+        H_m\bigl(s,u(s,z,r)\bigr).
+\end{multline}
+Terms with indices outside the arrays are zero.
+\end{proposition}
+\begin{proof}
+The inner integral on a fixed common-coordinate box is
+\[
+ d\sum_{\ell=0}^{R-1}
+   \left(\prod_{i=1}^{k-1}g_\ell(a_i)\right)
+   H_\ell(s,u(s,z,r)).
+\]
+Square this expression and group the common-coordinate boxes by $s,r,z$.
+Their product weights and volumes give
+$\binom{k-1}{r}Q_r^{\ell m}(z)P_{k-1-r}^{\ell m}(s-z)$.
+The two remaining factors of $d$ come from the two fiber integrals.
+\end{proof}
+
+\subsection{The coefficient arrays}
+For \eqref{eq:parameters}, choose
+\begin{equation}\label{eq:mesh}
+ d=\frac1{65536},\qquad R=3.
+\end{equation}
+The integer data in \eqref{eq:integer-parameters} are
+\begin{equation}\label{eq:integer-data}
+\begin{gathered}
+ D=1019,\quad T=17419,\quad L=16305,\quad N=17374,\quad M_0=16261,\\
+ C_1=10171,\quad C_2=10378,\quad C_3=11321,\quad C_r=12082\ (r\ge4).
+\end{gathered}
+\end{equation}
+At most eleven large coordinates occur. The six arrays
+$g_0,g_1,g_2,h_0,h_1,h_2$, each of length $17375$, are specified in
+Appendix~\ref{app:certificate}. Every entry is an exact dyadic rational;
+together with \eqref{eq:allowed-box} and \eqref{eq:finite-F}, these arrays
+define $F$ exactly.
+
+The arrays were found by a variational search in the family
+\eqref{eq:finite-F}. The coordinate profiles were initialized from
+\[
+ \left(\frac{c}{c+(a+\tfrac12)d}\right)^{p_\ell},\qquad
+ c=0.0014,\quad(p_0,p_1,p_2)=(0.90,0.96,1.02),
+\]
+with an independent normalization for each profile. The radial arrays
+were optimized on a coarser mesh and interpolated to \eqref{eq:mesh}.
+This describes the search only. The definition used in the proof is the
+stored dyadic array, not the displayed real-power formula or the output
+of an eigenvalue solver.
+
+\section{The certificate and the prime-gap bound}\label{sec:certificate}
+\begin{proposition}[Finite certificate]\label{prop:certificate}
+The function specified by \eqref{eq:finite-F},
+\eqref{eq:integer-data}, and the coefficient arrays in
+Appendix~\ref{app:certificate} has $I(F)>0$
+and satisfies
+\begin{equation}\label{eq:certified-interval}
+ \frac{6037239562351545}{6036062711329456}
+ \ \le\ \frac{45\Jb(F)}{I(F)}
+ \ \le\ \frac{72446874766843545}{72432752528865376}.
+\end{equation}
+In particular,
+\begin{equation}\label{eq:certified-decimal}
+ 1.0001949699<\frac{45\Jb(F)}{I(F)}<1.0001949704.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Evaluate \eqref{eq:finite-I} and \eqref{eq:finite-J} by directed
+rounding, with the input entries interpreted as exact dyadic rationals.
+The interval computation performs the convolutions
+\eqref{eq:small-powers}--\eqref{eq:large-powers} directly and evaluates the
+prefix sums \eqref{eq:prefix}. It returns lower and upper bounds for each
+pair $(\ell,m)$ with $\ell\le m$. Off-diagonal contributions are included
+with multiplicity two.
+
+The polynomial coefficients are nonnegative. Their lower and upper
+bounds are therefore obtained by downward and upward rounding,
+respectively, at every operation. The factors involving $h_\ell$ may
+have either sign; these are enclosed by interval multiplication and
+addition. The resulting hexadecimal endpoints are converted to exact
+rational numbers before the six pair contributions are combined.
+In particular, the exact aggregate enclosures are
+\begin{align*}
+ \frac{2263523516527043}{2251799813685248}
+ &\le I(F)\le\frac{1131761758374273}{1125899906842624},\\
+ \frac{402482637490103}{18014398509481984}
+ &\le\Jb(F)\le\frac{1609930550374301}{72057594037927936}.
+\end{align*}
+The norm has a strictly positive lower bound. Dividing the lower
+numerator by the upper denominator, and conversely for the upper bound,
+gives \eqref{eq:certified-interval}.
+The arithmetic procedure and complete endpoint data are specified in
+Appendix~\ref{app:certificate}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:tuples}]
+Proposition~\ref{prop:distribution} verifies the distribution hypothesis
+of Proposition~\ref{prop:sieve}. The function $F$ is symmetric and belongs
+to $L^2(\Tset_{45})$. By
+\eqref{eq:box-lower} and Proposition~\ref{prop:certificate},
+\[
+ 45J(F)\ge45\Jb(F)>I(F)>0.
+\]
+Proposition~\ref{prop:sieve} proves the assertion.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Consider the following set $\mathcal A$:
+\begin{equation}\label{eq:tuple}
+\begin{split}
+\{&0,2,12,14,24,26,30,32,36,50,54,56,60,66,72,74,80,84,\\
+  &92,96,102,110,114,116,122,126,134,140,144,150,156,162,\\
+  &164,170,176,180,182,186,192,194,200,204,206,210,212\}.
+\end{split}
+\end{equation}
+\begin{samepage}
+It has $45$ distinct elements and diameter $212$. The table below gives
+one residue class omitted by $\mathcal A$ for each prime at most $45$.
+\begin{center}
+\small
+\begin{tabular}{@{}c*{14}{r}@{}}
+\toprule
+$p$&2&3&5&7&11&13&17&19&23&29&31&37&41&43\\
+Omitted&1&1&3&6&9&3&1&6&17&13&28&31&8&25\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{samepage}
+For $p>45$, a $45$-element set cannot occupy all residue classes.
+Thus $\mathcal A$ is admissible. By Theorem~\ref{thm:tuples}, infinitely
+many of its translates contain two primes. Between any such pair there
+is a consecutive-prime gap at most $212$. These pairs occur arbitrarily
+far out, proving $H_1\le212$.
+\end{proof}
+
+\appendix
+\section{Finite certificate}\label{app:certificate}\label{app:margins}
+The arrays in \eqref{eq:finite-F} are specified by
+\path{ancillary/witness.hex}. Its first line contains
+$(k,R,N+1,D,d^{-1},T,L,r_{\max})$, and its second line contains
+$(C_0,\ldots,C_{r_{\max}+1})$, where $k=45$, $C_0=0$, and $r_{\max}=11$;
+the remaining parameter values are given in
+\eqref{eq:mesh}--\eqref{eq:integer-data}.
+For each $a=0,\ldots,N$, the next line lists
+$g_0(a),g_1(a),g_2(a),h_0(a),h_1(a),h_2(a)$ as exact hexadecimal
+dyadic rationals. The SHA--256 digest, with the two lines concatenated, is
+\begin{center}
+\small\ttfamily
+4b82ce9794faeb80d1766dddc2884d6a\\
+19734490baf15a4200bb15bdfd5af718
+\end{center}
+
+The verifier \path{ancillary/certify.cpp} evaluates
+\eqref{eq:finite-I} and \eqref{eq:finite-J} using IEEE~754 binary64
+arithmetic with gradual underflow and correctly rounded addition,
+multiplication, and division. The input dyadics and all required binomial
+coefficients are represented exactly. Each operation is rounded outwards;
+signed products use the minimum and maximum of the four endpoint
+products. Induction therefore gives an enclosure of every intermediate
+quantity. The six pair enclosures are combined with exact rational
+arithmetic, giving \eqref{eq:certified-interval}. The computation assumes
+that the implementation honors the rounding modes and compiler options
+\begin{verbatim}
+-O3 -std=c++17 -fopenmp -frounding-math
+-ffp-contract=off -fno-fast-math
+\end{verbatim}
+
+With Python~3 and a C++17 compiler supporting this arithmetic model and
+OpenMP, the certificate is reproduced by
+\begin{verbatim}
+python3 ancillary/run_certificate.py --threads 4
+\end{verbatim}
+This checks the witness digest, the rational support inequalities, and
+tuple admissibility, then compiles the verifier and evaluates the finite
+sums. The recorded pair endpoints are in
+\path{ancillary/reference_4threads.json}.
+
+The six margins in \eqref{eq:uniform-one}--\eqref{eq:uniform-two}
+exceed, in their displayed order,
+\[
+ (0.0001580,\ 0.0000756,\ 0.0001434,\ 0.02725,\ 0.0001891,\ 0.0001879).
+\]
+These terminating decimals are strict rational lower bounds. All
+parameter comparisons in Section~\ref{sec:distribution} are checked by
+\path{ancillary/verify_support.py}; their exact margins are recorded in
+\path{ancillary/support_output.json}.
+
+\section{Research provenance, acknowledgment, and release status}
+\label{app:provenance}
+
+\subsection{Generation and human involvement}
+This manuscript was generated in the ChatGPT web interface by
+\href{https://developers.openai.com/api/docs/models/gpt-5.6-sol}
+{OpenAI GPT-5.6 Sol} (model identifier \texttt{gpt-5.6-sol}), using Pro
+reasoning effort. Siddhartha Mahajan supplied the bounded-prime-gaps problem,
+directed GPT-5.6 Sol to the relevant source materials, and gave brief,
+high-level instructions,
+including the instruction to seek the strongest reduction it could support.
+GPT-5.6 Sol generated the principal mathematical argument, parameter search,
+manuscript text, certificate data, and verification software. Codex was used
+only afterward to inspect the release package and rerun its computational
+checks.
+
+Mahajan has not independently derived or checked the proof and has not
+verified it beyond asking Codex to review and test its own output. His role in
+this release is prompting, provision of resources, curation, and publication.
+No independent human mathematician has yet verified the analytic argument.
+The successful binary64 and integer-interval computations are reproducibility
+checks of the finite certificate; they are not independent human verification.
+Readers should therefore treat the stated theorem as a candidate result
+pending expert scrutiny.
+
+The model is named as the author of this repository artifact to reflect how
+the work was produced.
+
+\subsection{Dependence on Stadlmann's work}
+The argument depends decisively on Julia Stadlmann's distributional framework
+and her proof of $H_1\le240$ \cite{Stadlmann26}. It does not strengthen her
+equidistribution theorems. Its claimed new contribution is the partition of
+the permitted support together with the finite sieve-function certificate
+that uses those theorems to reach the smaller diameter.
+
+\subsection{Lossfunk acknowledgment}
+The problem resources, source collection, and research workspace used for
+this project were obtained through Lossfunk, headed by Paras Chopra.
+GPT-5.6 Sol and Siddhartha Mahajan thank Paras Chopra and the Lossfunk team
+for making those resources available.
+
+\subsection{Public archive}
+The manuscript source, ancillary code, exact witness, reference outputs,
+checksums, and a human-readable provenance record are available at
+\begin{center}
+\url{https://github.com/Siddhartha-Mahajan/prime-gap-212}.
+\end{center}
+The repository does not currently contain a complete native export of the
+Codex conversation.
+
+\begin{thebibliography}{9}
+\bibitem{BakerIrving}
+R. C. Baker and A. J. Irving,
+\emph{Bounded intervals containing many primes},
+Math. Z. \textbf{286} (2017), 821--841.
+
+\bibitem{GPY}
+D. A. Goldston, J. Pintz, and C. Y. Y\i ld\i r\i m,
+\emph{Primes in tuples I},
+Ann. of Math. (2) \textbf{170} (2009), 819--862.
+
+\bibitem{Maynard}
+J. Maynard,
+\emph{Small gaps between primes},
+Ann. of Math. (2) \textbf{181} (2015), 383--413.
+
+\bibitem{PolymathDistribution}
+D. H. J. Polymath,
+\emph{New equidistribution estimates of Zhang type},
+Algebra Number Theory \textbf{8} (2014), no.~9, 2067--2199.
+
+\bibitem{PolymathSieve}
+D. H. J. Polymath,
+\emph{Variants of the Selberg sieve, and bounded intervals containing many primes},
+Res. Math. Sci. \textbf{1} (2014), 1--83.
+
+\bibitem{Stadlmann25}
+J. Stadlmann,
+\emph{On primes in arithmetic progressions and bounded gaps between many primes},
+Adv. Math. \textbf{468} (2025), 110190.
+
+\bibitem{Stadlmann26}
+J. Stadlmann,
+\emph{Bounded gaps between primes},
+arXiv:2608.31126v1 [math.NT], 2026.
+
+\bibitem{Zhang}
+Y. Zhang,
+\emph{Bounded gaps between primes},
+Ann. of Math. (2) \textbf{179} (2014), no.~3, 1121--1174.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,26 @@
+{
+  "algorithm": "SHA-256",
+  "sha256": {
+    ".gitignore": "89540199f3cd365d3d491c64fdd3c537e39a5be8606206e3e964c4a243e7a96b",
+    "Makefile": "d5c6f77b79143e27347d840ed94ef13e079ef983b04fe2140e4361cd862c48ed",
+    "PROVENANCE.md": "2000064ecef33ef44eb19b1a6fb4721f3972fcd40d24d8a43d57250c9bfdaf3e",
+    "README.md": "cc0dfe00466778ecdb27360a34dbafce29de3e969fe052e79fa0598a89601e55",
+    "ancillary/certify.cpp": "23fa6eb8f4c73a31c5a5c46fc13e18395e3b9a965bb4c2f793fd0421d565dd93",
+    "ancillary/certify_integer.cpp": "13f2cd0f2e836e85f429d1845a4668acb1fe6344c6589eb7789a949ced7c86fc",
+    "ancillary/fixed_inputs.py": "010089c1df14ad7c56b93d8126cf4163e5305ebab34af9553971ac32cd882660",
+    "ancillary/parameters.json": "17e39636aaebb256c236ff9bbc9ef5b34f6c63be67f7fe8b17997fbc214cfe07",
+    "ancillary/reference_1thread.json": "b239cad979c156aa9d7a740387945b433191da599aa6516658cd5a2578a7d7e1",
+    "ancillary/reference_4threads.json": "c188fc3fea7da4b0a6cc3b6be62bf8562f686854579f35ab3740137f06311ac6",
+    "ancillary/reference_integer.json": "2d52699279470834148b0b5f2100224c1d7d0d79599f054564baa9c37a75081b",
+    "ancillary/run_certificate.py": "920ddc116202d884ed7192f9824e8804f9df4d1587ff8aa19d7d3b12e6f3888d",
+    "ancillary/run_integer_certificate.py": "39e22d63f5c18f0b056e830c49d87be78816cb0c6b7c3be646d5a660cb18c65f",
+    "ancillary/support_output.json": "326e5374e37269af6f88114f679c3b134768a5eb469dc4442b45bde479bb9e1b",
+    "ancillary/test_formulas.py": "580a35270a52d537d156df63ef1f8cff6a6dc22dd1d5bf8483a7e79a17ff52f3",
+    "ancillary/test_output.json": "17b87f4c93191a65c8e905988b581582116c7e41693adb92e3677f3cc91bba86",
+    "ancillary/tuple.json": "dab9a04946c9e81aaab6523e8b865e6074eb25e072d66497cc8ea66649650a3a",
+    "ancillary/verify_support.py": "daa1d0670f5dcf5000f549c2bc7a9b0be066f3deace7e2ee2d4799da2b75081e",
+    "ancillary/witness.hex": "4b82ce9794faeb80d1766dddc2884d6a19734490baf15a4200bb15bdfd5af718",
+    "paper.pdf": "19b2dd4422fa1edb55dba71873d1f05f0f32e9546f0f81369595436849003218",
+    "paper.tex": "3ddb0b1384ee819abd44e50227ad3f9627169c7ddaf7326a004ec3f5d00c6bf1"
+  }
+}

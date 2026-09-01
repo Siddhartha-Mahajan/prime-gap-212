@@ -1,0 +1,13 @@
+.DS_Store
+paper.aux
+paper.log
+paper.out
+paper.toc
+paper.fls
+paper.fdb_latexmk
+paper.synctex.gz
+ancillary/__pycache__/
+ancillary/certify
+ancillary/certify_integer
+ancillary/verified_output.json
+ancillary/verified_integer_output.json

@@ -1,0 +1,85 @@
+{
+  "threads": 1,
+  "witness_sha256": "4b82ce9794faeb80d1766dddc2884d6a19734490baf15a4200bb15bdfd5af718",
+  "environment": {
+    "compiler_version": "g++ (Debian 14.2.0-19) 14.2.0",
+    "python_version": "3.13.5",
+    "system": "Linux",
+    "machine": "x86_64",
+    "compiler_flags": [
+      "-O3",
+      "-std=c++17",
+      "-fopenmp",
+      "-frounding-math",
+      "-ffp-contract=off",
+      "-fno-fast-math"
+    ]
+  },
+  "pairs": [
+    {
+      "i": 0,
+      "j": 0,
+      "Ilo": "0x1.cc2765eed44d3p+1",
+      "Ihi": "0x1.cc2765eed66dap+1",
+      "Jlo": "0x1.440872a5b344fp-4",
+      "Jhi": "0x1.440872a5b8403p-4",
+      "seconds": 7.175755574
+    },
+    {
+      "i": 0,
+      "j": 1,
+      "Ilo": "-0x1.29c01c13f3f0bp+3",
+      "Ihi": "-0x1.29c01c13f26e4p+3",
+      "Jlo": "-0x1.a5439c7056bffp-3",
+      "Jhi": "-0x1.a5439c70503f2p-3",
+      "seconds": 7.126071703
+    },
+    {
+      "i": 0,
+      "j": 2,
+      "Ilo": "0x1.efd7a80ea98e6p+1",
+      "Ihi": "0x1.efd7a80eabe71p+1",
+      "Jlo": "0x1.5f4c582a7fa8cp-4",
+      "Jhi": "0x1.5f4c582a84e37p-4",
+      "seconds": 7.367565393
+    },
+    {
+      "i": 1,
+      "j": 1,
+      "Ilo": "0x1.97c546686ce7ap+4",
+      "Ihi": "0x1.97c546686ef5ap+4",
+      "Jlo": "0x1.2081877eeeff1p-1",
+      "Jhi": "0x1.2081877ef385ap-1",
+      "seconds": 7.370915283
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "Ilo": "-0x1.65d43560218e5p+3",
+      "Ihi": "-0x1.65d435601faaap+3",
+      "Jlo": "-0x1.f937f4418ac56p-3",
+      "Jhi": "-0x1.f937f441837adp-3",
+      "seconds": 7.244955196
+    },
+    {
+      "i": 2,
+      "j": 2,
+      "Ilo": "0x1.49a61e41b436ap+2",
+      "Ihi": "0x1.49a61e41b6073p+2",
+      "Jlo": "0x1.cec4767e0765bp-4",
+      "Jhi": "0x1.cec4767e0dc76p-4",
+      "seconds": 7.102962335
+    }
+  ],
+  "exact_totals": {
+    "Ilo": "2263523516527043/2251799813685248",
+    "Ihi": "1131761758374273/1125899906842624",
+    "Jlo": "804965274967803/36028797018963968",
+    "Jhi": "1609930550399291/72057594037927936"
+  },
+  "exact_ratio_lower": "12074479124517045/12072125422658912",
+  "exact_ratio_upper": "72446874767968095/72432752528865376",
+  "ratio_lower": "1.00019496996392327010990288817",
+  "ratio_upper": "1.00019497034987164277019713534",
+  "threshold_passed": true
+}
