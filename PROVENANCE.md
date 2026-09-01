@@ -46,6 +46,4 @@ and reported that the published enclosure and strict threshold were verified. Th
 
 No independent human mathematician has yet verified the analytic proof. Until such review occurs, this repository should be described as an **AI-generated candidate mathematical result with reproducible computational certificates**, not as an independently verified or peer-reviewed theorem.
 
-The repository includes this human-readable account but does not currently include a complete native export of the Codex conversation.
-
 Canonical repository: <https://github.com/Siddhartha-Mahajan/prime-gap-212>
