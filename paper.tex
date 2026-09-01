@@ -45,7 +45,10 @@ generated in the ChatGPT web interface by GPT-5.6 Sol using Pro reasoning
 effort; Codex was used afterward only for review and computational verification.
 See Appendix~\ref{app:provenance} for the full provenance and release status.
 The public repository is
-\url{https://github.com/Siddhartha-Mahajan/prime-gap-212}.}
+\url{https://github.com/Siddhartha-Mahajan/prime-gap-212}. Human
+correspondence: Siddhartha Mahajan,
+\href{mailto:siddharthamahajan03@gmail.com}
+{\texttt{siddharthamahajan03@gmail.com}}.}
 \date{September 2, 2026}
 \subjclass[2020]{11N05, 11N36}
 \keywords{Bounded prime gaps, Maynard--Tao sieve, distribution in arithmetic progressions, computer-assisted proof}
@@ -925,6 +928,17 @@ is a consecutive-prime gap at most $212$. These pairs occur arbitrarily
 far out, proving $H_1\le212$.
 \end{proof}
 
+\section*{Acknowledgments}
+Siddhartha Mahajan thanks Paras Chopra, founder of
+\href{https://lossfunk.com}{Lossfunk}, for introducing him, during his time
+as a Research Fellow at Lossfunk, to the general research direction of using
+AI systems to attack mathematical problems. He also thanks Lossfunk, a
+Bangalore-based research lab exploring general intelligence---including
+AI~$\times$~science and AI~$\times$~mathematics---for providing the research
+workspace, environment, and GPT access that enabled this project. Siddhartha
+Mahajan also thanks Julia Stadlmann, whose work \cite{Stadlmann26} this
+manuscript heavily builds upon.
+
 \appendix
 \section{Finite certificate}\label{app:certificate}\label{app:margins}
 The arrays in \eqref{eq:finite-F} are specified by
@@ -977,7 +991,7 @@ parameter comparisons in Section~\ref{sec:distribution} are checked by
 \path{ancillary/verify_support.py}; their exact margins are recorded in
 \path{ancillary/support_output.json}.
 
-\section{Research provenance, acknowledgment, and release status}
+\section{Research provenance and release status}
 \label{app:provenance}
 
 \subsection{Generation and human involvement}
@@ -1004,12 +1018,6 @@ pending expert scrutiny.
 
 The model is named as the author of this repository artifact to reflect how
 the work was produced.
-
-\subsection{Lossfunk acknowledgment}
-The problem resources, source collection, and research workspace used for
-this project were obtained through Lossfunk, headed by Paras Chopra.
-GPT-5.6 Sol and Siddhartha Mahajan thank Paras Chopra and the Lossfunk team
-for making those resources available.
 
 \subsection{Public archive}
 The manuscript source, ancillary code, exact witness, reference outputs,

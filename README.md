@@ -12,10 +12,22 @@
 
 Repository: <https://github.com/Siddhartha-Mahajan/prime-gap-212>
 
-The problem resources and source collection were obtained through Lossfunk,
-headed by Paras Chopra.
 See [`PROVENANCE.md`](PROVENANCE.md) and Appendix B of the paper for the full
 attribution and verification status.
+
+Human correspondence: Siddhartha Mahajan
+([siddharthamahajan03@gmail.com](mailto:siddharthamahajan03@gmail.com)).
+
+## Acknowledgments
+
+Siddhartha Mahajan thanks Paras Chopra, founder of
+[Lossfunk](https://lossfunk.com), for introducing him, during his time as a
+Research Fellow at Lossfunk, to the general research direction of using AI
+systems to attack mathematical problems. He also thanks Lossfunk, a
+Bangalore-based research lab exploring general intelligence—including AI ×
+science and AI × mathematics—for providing the research workspace,
+environment, and GPT access that enabled this project. Siddhartha Mahajan also
+thanks Julia Stadlmann, whose work this manuscript heavily builds upon.
 
 `paper.tex` contains the complete article, including its bibliography;
 `paper.pdf` is the compiled version. Appendix A specifies the finite witness,

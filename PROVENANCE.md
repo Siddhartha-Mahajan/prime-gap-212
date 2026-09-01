@@ -9,7 +9,7 @@ This file records how the repository artifact was produced. It is intended to pr
 | Generator and repository-artifact author | OpenAI GPT-5.6 Sol (`gpt-5.6-sol`), used in the ChatGPT web interface with Pro reasoning effort |
 | Later review and computational verification | Codex |
 | Human prompter, curator, and releaser | Siddhartha Mahajan |
-| Research resources | Lossfunk, headed by Paras Chopra |
+| Human correspondence | [siddharthamahajan03@gmail.com](mailto:siddharthamahajan03@gmail.com) |
 
 Official model documentation: <https://developers.openai.com/api/docs/models/gpt-5.6-sol>
 
