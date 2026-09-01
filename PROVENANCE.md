@@ -1,12 +1,12 @@
 # Authorship, provenance, and verification status
 
-This file records how the repository artifact was produced. It is intended to prevent the use of vague phrases such as "AI-assisted" from understating the model's role.
+This file records how the manuscript was produced. It is intended to prevent the use of vague phrases such as "AI-assisted" from understating the model's role.
 
 ## Attribution
 
 | Role | Attribution |
 | --- | --- |
-| Generator and repository-artifact author | OpenAI GPT-5.6 Sol (`gpt-5.6-sol`), used in the ChatGPT web interface with Pro reasoning effort |
+| Generator and manuscript author | OpenAI GPT-5.6 Sol (`gpt-5.6-sol`), used in the ChatGPT web interface with Pro reasoning effort |
 | Later review and computational verification | Codex |
 | Human prompter, curator, and releaser | Siddhartha Mahajan, Research Fellow at Lossfunk |
 | Human correspondence | Siddhartha Mahajan, Research Fellow at Lossfunk, [siddharthamahajan03@gmail.com](mailto:siddharthamahajan03@gmail.com) |
@@ -21,9 +21,9 @@ Mahajan did **not** independently derive, line-check, or verify the mathematical
 
 ## What GPT-5.6 Sol did
 
-GPT-5.6 Sol, running in the ChatGPT web interface with Pro reasoning effort, conducted the literature-guided investigation, developed the claimed support and partition argument, searched for the finite sieve function, generated the mathematical exposition, produced the certificate and verification programs, and assembled the manuscript package. Codex was used only afterward to review the package and rerun computational checks.
+GPT-5.6 Sol, running in the ChatGPT web interface with Pro reasoning effort, conducted the literature-guided investigation, developed the claimed support and partition argument, searched for the finite sieve function, generated the mathematical exposition, produced the certificate and verification programs, and assembled the manuscript package. Codex was used afterward to review the package and rerun computational checks.
 
-The model is named as the author of this GitHub artifact at Mahajan's request because that best describes who generated it.
+The model is named as the author of this manuscript at Mahajan's request because that best describes who generated it.
 
 ## Computational checks
 

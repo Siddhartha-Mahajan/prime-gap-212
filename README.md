@@ -1,9 +1,9 @@
 # A bound of 212 for gaps between consecutive primes
 
 > **Release status:** This is a substantially AI-generated mathematical
-> research artifact. OpenAI GPT-5.6 Sol, running in the ChatGPT web interface
+> manuscript. OpenAI GPT-5.6 Sol, running in the ChatGPT web interface
 > with Pro reasoning effort, generated the principal argument, manuscript,
-> and verification code. Codex was used afterward only for package review and
+> and verification code. Codex was used afterward for package review and
 > computational verification. Siddhartha Mahajan, Research Fellow at Lossfunk,
 > supplied the problem and source materials, gave brief high-level
 > directions, curated the result, and released it. He did not independently
