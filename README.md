@@ -25,7 +25,10 @@ At the endpoint `xi2 = xi3 = 2/5`, a Heath--Brown decomposition with
 - the elementary Type-0 estimate for a long smooth factor.
 
 The distribution proof combines the Type-II and Type-III estimates with a
-direct bounded-variation estimate for the Type-0 branch.
+direct bounded-variation estimate for the Type-0 branch. The endpoint
+Heath--Brown reduction records uniform derivative and coefficient-sequence
+bounds, the polylogarithmic number of localized convolutions, the strengthened
+logarithmic-saving budget, and the endpoint scale margins explicitly.
 
 The sieve uses the prime-supported minorant
 

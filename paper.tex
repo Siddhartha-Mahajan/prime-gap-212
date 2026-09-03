@@ -523,37 +523,133 @@ holds for $\rho_x$.
 \begin{proof}
 We adapt the proof of \cite[Lemma~2.7 and Section~3]
 {PolymathDistribution}, retaining only the alternatives that are needed
-at the endpoint $2/5$.  Put
+at the endpoint $2/5$. We first record the uniformity in that argument.
+Fix the saving $C>0$ required in the conclusion. Choose a fixed
+localization parameter $C_0>2C+10$; it will be enlarged once below by an
+amount depending only on $C$ and $K$. Put
 \[
  \sigma=\frac1{10}+\frac\eta4.
 \]
 Thus $\sigma>1/10$ and, for our parameters, $\sigma>2\omega$.
 Apply the Heath--Brown identity with $K=10$, for which $1/K<2\sigma$,
-followed by the finer-than-dyadic smooth decomposition
-used in \cite[Section~3]{PolymathDistribution}.  Up to
-$O((\log x)^{O(1)})$ terms, whose number is absorbed by the arbitrary
-logarithmic saving, this reduces the von Mangoldt function on $[x,2x]$
-to convolutions
+and use the finer-than-dyadic decomposition in
+\cite[Equations~(3.8)--(3.13)]{PolymathDistribution}. More explicitly,
+take
+\[
+ \Theta=1+(\log x)^{-C_0}
+\]
+and a smooth partition of unity on the multiplicative scales
+$N\in\{\Theta^m:m\ge0\}$. The cutoff functions $\psi_N$ are supported
+on $[\Theta^{-1}N,\Theta N]$ and, for every fixed $r\ge0$, satisfy
+\begin{equation}\label{eq:HB-derivatives}
+ \sup_t N^r|\psi_N^{(r)}(t)|
+       \ll_r(\log x)^{rC_0}.
+\end{equation}
+The same bounds, with one additional fixed power of $\log x$, hold for
+the factor carrying the logarithm in the Heath--Brown identity. The
+implied constants are independent of the scale $N$.
+
+For the term with $j$ truncated M\"obius factors, where $1\le j\le K$,
+there are $2j\le20$ localized factors. The support restriction to
+$[x,2x]$ leaves at most
+\begin{equation}\label{eq:HB-number}
+ O\bigl((\log x)^{2j(C_0+1)}\bigr)
+ \le O\bigl((\log x)^{20(C_0+1)}\bigr)
+\end{equation}
+nonzero scale-tuples. The endpoint-collar function $e$ created when the
+sharp cutoff is removed is supported on two intervals of combined
+length $O(x(\log x)^{-C_0})$ and satisfies
+$|e(n)|\ll\tau(n)^{O_K(1)}(\log x)^{O_K(1)}$, with exponents independent
+of $C_0$. Lemma~1.3 of \cite{PolymathDistribution}, applied in each
+progression and to the averaged term, gives
+\begin{equation}\label{eq:HB-collar}
+ \sum_{q\in\mathcal R(x)}|E_e(x;q,a)|
+ \ll x(\log x)^{-C_0+O_K(1)}
+      +x^{1/2+2\omega+o(1)}.
+\end{equation}
+Indeed, the bound in one residue class is
+$((x(\log x)^{-C_0})/q+1)x^{o(1)}$; summing uses
+$\sum_{q\le Q}q^{-1}\ll\log Q$ and
+$\sum_{q\le Q}\phi(q)^{-1}\ll\log Q$. This is the endpoint-collar
+estimate used in \cite[Equations~(3.10)--(3.13)]{PolymathDistribution}.
+Since $\omega<1/20$, the second term in \eqref{eq:HB-collar} has a
+fixed power saving. Enlarge $C_0$, if necessary, so that
+\eqref{eq:HB-collar}, the finitely many
+Heath--Brown coefficients, and the initial triangle inequalities
+contribute $O_C(x(\log x)^{-C})$.
+
+We shall apply the two hypotheses of the lemma to each remaining
+localized convolution with the saving
+\begin{equation}\label{eq:HB-saving-budget}
+ C'=C+20(C_0+1)+2.
+\end{equation}
+Such a saving is available because the hypotheses hold with arbitrary
+logarithmic saving. Summing
+\eqref{eq:HB-number} terms then leaves the required saving $C$.
+
+We also verify that the distribution estimates are uniform over these
+scale-tuples. Every localized factor is one of
+$\psi_N\mu_{\le}$, $\psi_N$, or its logarithmic variant. Equations
+\eqref{eq:HB-derivatives} and the divisor bound give a coefficient-sequence
+bound $(\log x)^{O_{C_0,K}(1)}$, uniformly in $N$. By
+\cite[Lemma~3.4]{PolymathDistribution}, a factor at any scale at least
+$x^c$, with fixed $c>0$, has the Siegel--Walfisz property uniformly in
+the scale. The proof of that lemma also shows the required closure:
+if $\alpha$ and $\beta$ have uniform coefficient-sequence bounds,
+$\beta$ is Siegel--Walfisz, and its scale is at least $x^c$, then
+$\alpha\star\beta$ is Siegel--Walfisz, with a bound depending only on
+$c,C_0,K$ and the requested saving. A group of at most twenty factors
+whose product scale is at least $x^c$ contains a factor at scale at
+least $x^{c/20}$. That factor is Siegel--Walfisz by Lemma~3.4(iii), and
+iterating the closure statement over the other factors proves uniformly
+that the whole grouped convolution is Siegel--Walfisz. Multiplication by the single factor
+$\log N$ costs at most one power of $\log x$, which is covered by the
+two-power reserve in \eqref{eq:HB-saving-budget}. These are precisely the uniformity
+conventions required for the Type~II and Type~III hypotheses.
+
+It remains to locate the scales without losing an endpoint. For a
+nonzero scale-tuple $(N_1,\ldots,N_{2j})$, put
+\[
+ X_N=\prod_iN_i,\qquad
+ t_i=\frac{\log N_i}{\log X_N}.
+\]
+Then $t_i\ge0$ and $\sum_i t_i=1$ exactly. The support relations for
+the partition give
+\begin{equation}\label{eq:HB-scale-error}
+ X_N=x^{1+O_K(1/\log x)},
+ \qquad
+ \log_xN_i=t_i+O_K(1/\log x)
+\end{equation}
+uniformly in the tuple. Since $\eta$ is fixed, take $x$ large enough
+that the error for every individual exponent and every sum of at most
+three exponents is smaller than $\eta/4$. Thus the decomposition reduces the von Mangoldt function on
+$[x,2x]$, apart from the already bounded collar, to the uniformly
+controlled convolutions
 \[
  \alpha_1\star\cdots\star\alpha_s
 \]
-at scales $N_i=x^{t_i+o(1)}$, where $t_i\ge0$ and
-$\sum_i t_i=1$.  By \cite[Lemma~3.4]{PolymathDistribution}, every
-subconvolution at a scale $x^c$ with fixed $c>0$ has the
-Siegel--Walfisz property, and every individual factor at scale at least
-$x^{2\sigma}$ is smooth.  Choose the smooth decomposition sufficiently
-fine that all $o(1)$ endpoint errors below are smaller than $\eta/4$.
+whose normalized exponents are the $t_i$ above. An individual factor
+with $t_i\ge2\sigma$ is smooth by
+\cite[Lemma~3.4(ii)]{PolymathDistribution}; equality causes no problem,
+because \eqref{eq:HB-scale-error} and the common support enlargement by
+$\Theta$ give a scale comparable to $x^{2\sigma}$, which is the
+Vinogradov condition in that lemma.
 
 Apply \cite[Lemma~3.1]{PolymathDistribution} to the $t_i$.  In its
 Type~I/II alternative there is a partition into two groups, the smaller
-of which has exponent $\gamma$ satisfying
+of which has normalized exponent $\theta$ satisfying
 \[
- \frac12-\sigma+o(1)<\gamma\le\frac12.
+ \frac12-\sigma<\theta\le\frac12.
 \]
-Both grouped convolutions are Siegel--Walfisz, and
+In view of \eqref{eq:HB-scale-error}, the exponent of the smaller group
+is greater than $1/2-\sigma-\eta/4$. Both group scales are bounded below
+by a fixed positive power of $x$, so the uniform closure argument above
+shows that both grouped convolutions are Siegel--Walfisz. Moreover,
 \[
- \frac12-\sigma=\frac25-\frac\eta4>\frac25-\eta.
+ \frac12-\sigma-\frac\eta4
+   =\frac25-\frac\eta2>\frac25-\eta.
 \]
+The other endpoint is at most $1/2+\eta/4<3/5+\eta$.
 Consequently this is a Type~II convolution from the family in the
 statement.
 
@@ -565,12 +661,15 @@ with exponents $t_i,t_j,t_k$ satisfying
 \]
 The identities
 \[
- 2\sigma=\frac15+\frac\eta2,qquad
- \frac12-\sigma=\frac25-\frac\eta4,qquad
+ 2\sigma=\frac15+\frac\eta2,\qquad
+ \frac12-\sigma=\frac25-\frac\eta4,\qquad
  \frac12+\sigma=\frac35+\frac\eta4
 \]
 place this convolution strictly inside the Type~III ranges for
-$\xi_3=2/5$, even after the endpoint errors.  It is therefore covered
+$\xi_3=2/5$: the respective margins before the error in
+\eqref{eq:HB-scale-error} are $3\eta/2$, $5\eta/4$, and $5\eta/4$.
+Hence all remain positive after an error of at most $\eta/4$. The three
+selected factors are smooth uniformly by the preceding paragraph. It is therefore covered
 by the second hypothesis.
 
 It remains to treat the Type~0 alternative. Write the convolution as
@@ -582,15 +681,19 @@ It remains to treat the Type~0 alternative. Write the convolution as
 where $\beta$ is the complementary coefficient sequence at scale $M$ and
 $\psi$ has the smoothness bounds furnished by Lemma~3.4 of that paper.
 For primitive $a\pmod q$, terms with $(\ell,q)>1$ vanish from both sides
-of the discrepancy, and hence
-\begin{multline*}
- E_F(x;q,a)=\sum_{(\ell,q)=1}\beta(\ell)\left(
+of the discrepancy. Put
+\begin{align*}
+ S_\ell(a;q)&=
  \sum_{\substack{x/\ell\le m\le2x/\ell\\
-                  m\equiv a\bar\ell\pmod q}}\alpha(m)\right.\\
- \left.{}-\frac1{\phi(q)}
- \sum_{\substack{x/\ell\le m\le2x/\ell\\(m,q)=1}}\alpha(m)
- \right).
-\end{multline*}
+                  m\equiv a\bar\ell\pmod q}}\alpha(m),&
+ S_\ell^*(q)&=
+ \sum_{\substack{x/\ell\le m\le2x/\ell\\(m,q)=1}}\alpha(m).
+\end{align*}
+Then
+\[
+ E_F(x;q,a)=\sum_{(\ell,q)=1}\beta(\ell)
+ \left(S_\ell(a;q)-\frac{S_\ell^*(q)}{\phi(q)}\right).
+\]
 For fixed $\ell$, the function
 \[
  g_\ell(t)=\psi(t/N)\ind_{[x/\ell,2x/\ell]}(t)
