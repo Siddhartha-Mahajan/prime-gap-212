@@ -510,13 +510,18 @@ Let $\mathcal R(x)$ be a family of squarefree moduli satisfying
 \[
  x^{1/2-2\tau}\le q\le x^{1/2+2\omega}\qquad(q\in\mathcal R(x)).
 \]
-Suppose that, for every primitive residue class $a$, with arbitrary
-logarithmic saving and uniformly in the coefficient sequences, the
-discrepancy sum over $\mathcal R(x)$ is bounded by $x(\log x)^{-C}$ for
+Fix an integer $a=a(x)$ with $(a,P(x))=1$. Suppose, with arbitrary
+logarithmic saving, that the discrepancy sum over $\mathcal R(x)$ is
+bounded by $x(\log x)^{-C}$ for
 \begin{enumerate}
-\item every Type~II convolution in $\HH(\xi_1,2/5,2/5)$, and
-\item every Type~III convolution in $\HH(\xi_1,2/5,2/5)$.
+\item every Type~II convolution in $\HH(\xi_1,2/5,2/5)$ arising from
+the localized Heath--Brown decomposition below, and
+\item every Type~III convolution in $\HH(\xi_1,2/5,2/5)$ arising from
+that decomposition.
 \end{enumerate}
+For each requested saving, the implied constants may depend on the fixed
+coefficient and derivative bounds of the localized factors, but are
+uniform in their scale tuple.
 If $\omega<1/20$ and $0<\tau\le10^{-8}$, then the same conclusion
 holds for $\rho_x$.
 \end{lemma}
@@ -560,16 +565,23 @@ nonzero scale-tuples. The endpoint-collar function $e$ created when the
 sharp cutoff is removed is supported on two intervals of combined
 length $O(x(\log x)^{-C_0})$ and satisfies
 $|e(n)|\ll\tau(n)^{O_K(1)}(\log x)^{O_K(1)}$, with exponents independent
-of $C_0$. Lemma~1.3 of \cite{PolymathDistribution}, applied in each
-progression and to the averaged term, gives
+of $C_0$. If $I$ denotes the union of these intervals and $H$ its total
+length, then
+\cite[Lemma~1.3(iii)]{PolymathDistribution} gives, uniformly in the
+residue class,
+\begin{equation}\label{eq:HB-collar-class}
+ \sum_{\substack{n\in I\\n\equiv a\pmod q}}|e(n)|
+ \ll \frac Hq\tau(q)^{O_K(1)}(\log x)^{O_K(1)}+x^{o(1)}.
+\end{equation}
+Summing \eqref{eq:HB-collar-class}, and treating the averaged term with
+Lemma~1.3(ii), gives
 \begin{equation}\label{eq:HB-collar}
  \sum_{q\in\mathcal R(x)}|E_e(x;q,a)|
  \ll x(\log x)^{-C_0+O_K(1)}
       +x^{1/2+2\omega+o(1)}.
 \end{equation}
-Indeed, the bound in one residue class is
-$((x(\log x)^{-C_0})/q+1)x^{o(1)}$; summing uses
-$\sum_{q\le Q}q^{-1}\ll\log Q$ and
+Here one uses
+$\sum_{q\le Q}\tau(q)^{O_K(1)}/q\ll(\log Q)^{O_K(1)}$ and
 $\sum_{q\le Q}\phi(q)^{-1}\ll\log Q$. This is the endpoint-collar
 estimate used in \cite[Equations~(3.10)--(3.13)]{PolymathDistribution}.
 Since $\omega<1/20$, the second term in \eqref{eq:HB-collar} has a
@@ -587,14 +599,14 @@ Such a saving is available because the hypotheses hold with arbitrary
 logarithmic saving. Summing
 \eqref{eq:HB-number} terms then leaves the required saving $C$.
 
-We also verify that the distribution estimates are uniform over these
-scale-tuples. Every localized factor is one of
+We also verify the common bounds required in the statement. Every localized factor is one of
 $\psi_N\mu_{\le}$, $\psi_N$, or its logarithmic variant. Equations
 \eqref{eq:HB-derivatives} and the divisor bound give a coefficient-sequence
-bound $(\log x)^{O_{C_0,K}(1)}$, uniformly in $N$. By
-\cite[Lemma~3.4]{PolymathDistribution}, a factor at any scale at least
-$x^c$, with fixed $c>0$, has the Siegel--Walfisz property uniformly in
-the scale. The proof of that lemma also shows the required closure:
+bound $(\log x)^{O_{C_0,K}(1)}$, with constants common to every scale
+$N$. With these constants fixed, \cite[Lemma~3.4]{PolymathDistribution}
+shows that a factor at any scale at least $x^c$, for fixed $c>0$, has
+the Siegel--Walfisz property with constants independent of its scale.
+The proof of that lemma also shows the required closure:
 if $\alpha$ and $\beta$ have uniform coefficient-sequence bounds,
 $\beta$ is Siegel--Walfisz, and its scale is at least $x^c$, then
 $\alpha\star\beta$ is Siegel--Walfisz, with a bound depending only on
@@ -604,8 +616,9 @@ least $x^{c/20}$. That factor is Siegel--Walfisz by Lemma~3.4(iii), and
 iterating the closure statement over the other factors proves uniformly
 that the whole grouped convolution is Siegel--Walfisz. Multiplication by the single factor
 $\log N$ costs at most one power of $\log x$, which is covered by the
-two-power reserve in \eqref{eq:HB-saving-budget}. These are precisely the uniformity
-conventions required for the Type~II and Type~III hypotheses.
+two-power reserve in \eqref{eq:HB-saving-budget}. Thus the hypotheses
+are used only for this fixed, normalized class of localized sequences,
+uniformly over the scale tuple.
 
 It remains to locate the scales without losing an endpoint. For a
 nonzero scale-tuple $(N_1,\ldots,N_{2j})$, put
@@ -614,15 +627,18 @@ nonzero scale-tuple $(N_1,\ldots,N_{2j})$, put
  t_i=\frac{\log N_i}{\log X_N}.
 \]
 Then $t_i\ge0$ and $\sum_i t_i=1$ exactly. The support relations for
-the partition give
+the partition give, for every $S\subseteq\{1,\ldots,2j\}$,
 \begin{equation}\label{eq:HB-scale-error}
- X_N=x^{1+O_K(1/\log x)},
- \qquad
- \log_xN_i=t_i+O_K(1/\log x)
+ \begin{aligned}
+ X_N&=x^{1+O_K(1/\log x)},\\
+ \log_x\prod_{i\in S}N_i
+   &=\left(\sum_{i\in S}t_i\right)\log_xX_N
+     =\sum_{i\in S}t_i+O_K(1/\log x).
+ \end{aligned}
 \end{equation}
 uniformly in the tuple. Since $\eta$ is fixed, take $x$ large enough
-that the error for every individual exponent and every sum of at most
-three exponents is smaller than $\eta/4$. Thus the decomposition reduces the von Mangoldt function on
+that the error in \eqref{eq:HB-scale-error} is smaller than $\eta/4$
+for every subset $S$. Thus the decomposition reduces the von Mangoldt function on
 $[x,2x]$, apart from the already bounded collar, to the uniformly
 controlled convolutions
 \[
@@ -680,8 +696,9 @@ It remains to treat the Type~0 alternative. Write the convolution as
 \]
 where $\beta$ is the complementary coefficient sequence at scale $M$ and
 $\psi$ has the smoothness bounds furnished by Lemma~3.4 of that paper.
-For primitive $a\pmod q$, terms with $(\ell,q)>1$ vanish from both sides
-of the discrepancy. Put
+Since $(a,P(x))=1$ and every prime factor of $q$ is below $x$, one has
+$(a,q)=1$. Terms with $(\ell,q)>1$ therefore vanish from both sides of
+the discrepancy. Put
 \begin{align*}
  S_\ell(a;q)&=
  \sum_{\substack{x/\ell\le m\le2x/\ell\\
@@ -740,8 +757,8 @@ The parameters \eqref{eq:parameters} satisfy
 \eqref{eq:prime-distribution}.
 \end{proposition}
 \begin{proof}
-Fix $\varepsilon_0>0$ and a required logarithmic saving. Choose $\tau>0$
-sufficiently small for the distribution estimates below, with
+Fix $\varepsilon_0>0$, an integer $a=a(x)$ with $(a,P(x))=1$, and a
+required logarithmic saving. Choose $\tau>0$ sufficiently small for the distribution estimates below, with
 $\tau\le\tmax$. The subfamily $q<x^{1/2-2\tau}$ is covered directly,
 for $\rho_x$, by the Bombieri--Vinogradov theorem for $\Lambda$, removal
 of prime powers, and division by $\log(3x)$. We therefore
@@ -1189,6 +1206,37 @@ These terminating decimals are strict rational lower bounds. All
 parameter comparisons in Section~\ref{sec:distribution} are checked by
 \path{ancillary/verify_support.py}; their exact margins are recorded in
 \path{ancillary/support_output.json}.
+
+\section{Type-IIc window comparison}\label{app:typeIIc-window}
+The statement of \cite[Lemma~6]{Stadlmann26} uses the divisor window
+\begin{equation}\label{eq:window-52}
+ (T-52\tau-\delta_*,\ T-52\tau),
+ \qquad T=2\log_xr+2-\gamma-4\log_xq.
+\end{equation}
+One line near the beginning of its proof instead contains $100\tau$ in
+place of $52\tau$; the subsequent divisor family and calculations use
+$52\tau$. The construction in Proposition~\ref{prop:critical-factor}
+does not depend on which of these two constants is intended. It produces
+the interval
+\begin{equation}\label{eq:window-101}
+ [T-101\tau-\delta,\ T-101\tau].
+\end{equation}
+Since $\delta_*=\delta+\zeta$, $\zeta=10^{-6}$, and
+$0<\tau\le10^{-8}$, the interval \eqref{eq:window-101} lies strictly
+inside \eqref{eq:window-52}: its lower- and upper-endpoint slacks are
+\[
+ \zeta-49\tau\ge5.1\times10^{-7},
+ \qquad 49\tau>0.
+\]
+It also lies strictly inside the window obtained from
+\eqref{eq:window-52} by replacing $52\tau$ with $100\tau$; the
+corresponding slacks are
+\[
+ \zeta-\tau\ge9.9\times10^{-7},
+ \qquad \tau>0.
+\]
+Thus the Type-IIc application in this manuscript satisfies either
+displayed version of the cited divisor window.
 
 \section{Research provenance and release status}
 \label{app:provenance}

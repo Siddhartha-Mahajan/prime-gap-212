@@ -4,7 +4,7 @@
     ".gitignore": "89540199f3cd365d3d491c64fdd3c537e39a5be8606206e3e964c4a243e7a96b",
     "Makefile": "d5c6f77b79143e27347d840ed94ef13e079ef983b04fe2140e4361cd862c48ed",
     "PROVENANCE.md": "cbe75f81cda1c369c9c127a944446a9466f3171f8e608c3c5c52f9ab07c22caa",
-    "README.md": "61121249b6789b81af127c29069cb7a9fe5d82e8d5fbd7216005764d46d71975",
+    "README.md": "f9f691a4c229683d8411ff88e3f9cbe6b3000d7411a97776fb5a5ef638729884",
     "ancillary/certify.cpp": "23fa6eb8f4c73a31c5a5c46fc13e18395e3b9a965bb4c2f793fd0421d565dd93",
     "ancillary/certify_integer.cpp": "13f2cd0f2e836e85f429d1845a4668acb1fe6344c6589eb7789a949ced7c86fc",
     "ancillary/fixed_inputs.py": "010089c1df14ad7c56b93d8126cf4163e5305ebab34af9553971ac32cd882660",
@@ -20,7 +20,7 @@
     "ancillary/tuple.json": "dab9a04946c9e81aaab6523e8b865e6074eb25e072d66497cc8ea66649650a3a",
     "ancillary/verify_support.py": "152478dc3779fd3b7cc7a8cf787eb27200251afc9ecbcd3a62f382a960caab91",
     "ancillary/witness.hex": "4b82ce9794faeb80d1766dddc2884d6a19734490baf15a4200bb15bdfd5af718",
-    "paper.pdf": "3425c047716a2ef56b878ee14ab849ac7586adf166783384adc76e22486dd667",
-    "paper.tex": "b174f0347e4af1bac0cd66db5bb8475de89d0436f7e6431847abcc760eaa05ca"
+    "paper.pdf": "10d5e51ada117ee736397aca8c4e3f0acd652da14d8c27d407d08b786ed65ac7",
+    "paper.tex": "18e98ef7ce22ef508edb2ce0cebb820aad5092aa2e3d17d953f2593ee64a0c0c"
   }
 }

@@ -12,7 +12,7 @@
 
 Repository: <https://github.com/Siddhartha-Mahajan/prime-gap-212>
 
-See [`PROVENANCE.md`](PROVENANCE.md) and Appendix B of the paper for the full
+See [`PROVENANCE.md`](PROVENANCE.md) and Appendix C of the paper for the full
 attribution and verification status.
 
 ## Analytic method
