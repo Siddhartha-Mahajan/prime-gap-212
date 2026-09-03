@@ -26,8 +26,8 @@ def verify() -> dict:
     ds = delta + zeta
     G = Q(1, 3) + 8*w + Q(7, 3)*delta
     gm, gp = xi2 - eta, G + 3*eta
-    alpha = gm - 2*delta - 8*w - 61*tau
-    S = Q(1, 2) - 2*delta - 10*w - 68*tau
+    alpha = gm - 2*delta - 8*w - 109*tau
+    S = Q(1, 2) - 2*delta - 10*w - 116*tau
     C = max(Q(1, 2) - gp - 2*w - 7*tau, Q(4, 5)*(Q(1, 2) - gp))
     K = Q(2, 5) + Q(24, 5)*w + Q(7, 5)*delta
     Delta_Ih = (1 - 68*w)/14 - eta
@@ -81,7 +81,10 @@ def verify() -> dict:
         'IIc scalar 1': 1 - 8*w - 4*ds - 2*gp,
         'IIc scalar 2': gm - 32*w - 10*ds,
         'IIc scalar 3': 4*gm - 1 - 48*w - 16*ds,
-        'factor-window lower slack': zeta - tau,
+        'factor-window -52 lower slack': zeta - 49*tau,
+        'factor-window -52 upper slack': 49*tau,
+        'factor-window -100 lower slack': zeta - tau,
+        'factor-window -100 upper slack': tau,
         'gamma_max < 1/2': Q(1, 2) - gp,
         'gamma_max > gamma_min': gp - gm,
         'I low: Delta - delta': xi1 - 4*A + Q(2, 3) - 2*eta - delta,
@@ -109,12 +112,12 @@ def verify() -> dict:
 
     # Strict decimal lower bounds for the article and supporting certificate.
     printed_bounds = {
-        'partition: alpha - 2b1': '0.0001580',
-        'partition: S - (5/2)b2': '0.0000756',
+        'partition: alpha - 2b1': '0.0001576',
+        'partition: S - (5/2)b2': '0.0000751',
         'partition: 3C - b3': '0.0001434',
         'partition: S - 2B': '0.02725',
         'partition: gamma_min-2delta-4tau - 2B': '0.0001891',
-        'partition: S+alpha+2delta - 4B': '0.0001879',
+        'partition: S+alpha+2delta - 4B': '0.0001869',
         'IIc scalar 1': '0.02352',
         'IIc scalar 2': '0.01110',
         'IIc scalar 3': '0.00110',

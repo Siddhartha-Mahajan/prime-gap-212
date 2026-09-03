@@ -15,6 +15,27 @@ Repository: <https://github.com/Siddhartha-Mahajan/prime-gap-212>
 See [`PROVENANCE.md`](PROVENANCE.md) and Appendix B of the paper for the full
 attribution and verification status.
 
+## Analytic method
+
+At the endpoint `xi2 = xi3 = 2/5`, a Heath--Brown decomposition with
+`sigma = 1/10 + 10^-10/4` reduces the prime-distribution input to:
+
+- the existing Type-II estimates (Stadlmann Lemmas 3, 4, and 6);
+- the existing Type-III estimate (Stadlmann Lemma 7); and
+- the elementary Type-0 estimate for a long smooth factor.
+
+The distribution proof combines the Type-II and Type-III estimates with a
+direct bounded-variation estimate for the Type-0 branch.
+
+The sieve uses the prime-supported minorant
+
+```text
+rho_x(n) = 1_P(n) log(n) / log(3x)
+```
+
+on the relevant range. It has asymptotic density one, so the finite
+variational threshold is unchanged.
+
 Human correspondence: Siddhartha Mahajan, Research Fellow at Lossfunk
 ([siddharthamahajan03@gmail.com](mailto:siddharthamahajan03@gmail.com)).
 

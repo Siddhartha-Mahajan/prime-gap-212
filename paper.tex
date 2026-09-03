@@ -118,11 +118,13 @@ approximating an unspecified continuous optimizer, nor does it require
 certifying an eigenvalue calculation.
 
 The distribution theorems themselves are not strengthened here. We use
-Lemmas~3--7 of \cite{Stadlmann26}, which extend estimates from
+Lemmas~3, 4, 6, and~7 of \cite{Stadlmann26}, which extend estimates from
 \cite{BakerIrving,PolymathDistribution,Stadlmann25}. The role of the new
 partition lemma is to place a larger family of moduli within their
-hypotheses. We work with the prime indicator, so that no loss from a
-prime minorant enters the variational inequality.
+hypotheses. We use a nonnegative prime-supported weight of asymptotic
+density one, so that no loss from a prime minorant enters the variational
+inequality.  A direct Heath--Brown reduction at the endpoint
+$\xi_2=\xi_3=2/5$ supplies the required prime-distribution estimate.
 
 Sections~\ref{sec:sieve}--\ref{sec:distribution} establish the permissible
 support. Section~\ref{sec:discrete} gives the finite quadratic forms.
@@ -210,9 +212,19 @@ For a function $f(n;x)$ write
  E_f(x;q,a)=\sum_{\substack{x\le n\le2x\\n\equiv a\pmod q}}f(n;x)
  -\frac1{\phi(q)}\sum_{\substack{x\le n\le2x\\(n,q)=1}}f(n;x).
 \]
+For positive integers $n$ define the nonnegative prime-supported weight
+\begin{equation}\label{eq:rho}
+ \rho_x(n)=\frac{\log n}{\log(3x)}\ind_\PP(n)
+             \ind_{x/2\le n\le3x}.
+\end{equation}
+Thus $0\leq\rho_x\leq\ind_\PP$ on the range relevant to the sieve, and
+the prime number theorem gives
+\[
+ \sum_{x\leq n\leq2x}\rho_x(n)=(1+o(1))\frac{x}{\log x}.
+\]
 The distribution statement needed below is
 \begin{equation}\label{eq:prime-distribution}
- \sum_{q\in\Qset(x;\varepsilon_0)}|E_{\ind_\PP}(x;q,a)|
+ \sum_{q\in\Qset(x;\varepsilon_0)}|E_{\rho_x}(x;q,a)|
  \ll_{C,\varepsilon_0}\frac{x}{(\log x)^C}
  \qquad\text{for every }C>0,
 \end{equation}
@@ -231,9 +243,9 @@ containing at least two primes.
 \end{proposition}
 \begin{proof}
 Apply \cite[Proposition~1 and its proof]{Stadlmann26} with one support
-layer and $\rho=\ind_\PP$. The minorant parameters are $c_1=c_2=0$.
-The roughness condition is automatic for the prime indicator, and its
-mean is supplied by the prime number theorem. In the one-layer case the
+layer and $\rho=\rho_x$. The minorant parameters are $c_1=c_2=0$.
+The roughness condition is automatic because $\rho_x$ is supported on
+primes, and its mean was recorded above. In the one-layer case the
 integrals in that proposition are exactly \eqref{eq:I} and
 \eqref{eq:J}. The sieve argument applies to any fixed admissible tuple.
 
@@ -355,8 +367,8 @@ These parameters satisfy \eqref{eq:support-conditions}. Put
 We will take $\tau>0$ sufficiently small, always with $\tau\le\tmax$.
 Define
 \begin{align}
- \alpha&=\gmin-2\delta-8\omega-61\tmax,\label{eq:alpha}\\
- S&=\frac12-2\delta-10\omega-68\tmax,\label{eq:S}\\
+ \alpha&=\gmin-2\delta-8\omega-109\tmax,\label{eq:alpha}\\
+ S&=\frac12-2\delta-10\omega-116\tmax,\label{eq:S}\\
  C_*&=\max\left(\frac12-\gmax-2\omega-7\tmax,
                     \frac45\left(\frac12-\gmax\right)\right).
                     \label{eq:Cstar}
@@ -390,11 +402,11 @@ are bounded by $b_j$ for $1\le j\le3$.
 
 Set
 \begin{equation}\label{eq:capacities}
- a=\gamma-2\delta-8\omega_0-61\tau,\qquad
+ a=\gamma-2\delta-8\omega_0-109\tau,\qquad
  c=\frac12-\gamma-2\omega_0-7\tau,\qquad
- d=8\omega_0+57\tau.
+ d=8\omega_0+105\tau.
 \end{equation}
-These numbers are positive; in particular $d\ge49\tau$.
+These numbers are positive; in particular $d\ge97\tau$.
 Writing $c'=\max(c,d)$ and $d'=\min(c,d)$, we have
 \begin{gather}
  a\ge\alpha,\qquad a+c\ge S,\qquad
@@ -402,7 +414,7 @@ Writing $c'=\max(c,d)$ and $d'=\min(c,d)$, we have
  \label{eq:capacity-sums}\\
  c'\ge c\ge\frac12-\gmax-2\omega-7\tmax,\qquad
  c'\ge\frac{4c+d}{5}
-      =\frac45\left(\frac12-\gamma\right)+\frac{29}{5}\tau.
+      =\frac45\left(\frac12-\gamma\right)+\frac{77}{5}\tau.
  \label{eq:capacity-max}
 \end{gather}
 Thus $c'\ge C_*$. Moreover
@@ -424,8 +436,8 @@ $z_1,\ldots,z_s\in(0,\delta)$, and put
 \begin{align*}
  \ell_1&=\gamma-4\tau-\delta,&u_1&=\gamma-4\tau,\\
  \ell_2&=\frac12-\gamma-2\omega_0-7\tau-\delta,&u_2&=c,\\
- \ell_3&=-\gamma-8\omega_0-53\tau-\delta,&
- u_3&=-\gamma-8\omega_0-53\tau.
+ \ell_3&=-\gamma-8\omega_0-101\tau-\delta,&
+ u_3&=-\gamma-8\omega_0-101\tau.
 \end{align*}
 Each interval has length $\delta$, and
 \begin{equation}\label{eq:window-identities}
@@ -465,22 +477,160 @@ with
 All selections use disjoint prime factors where required, since $q$ is
 squarefree.
 
-The three closed intervals just constructed lie strictly inside the
-intervals \eqref{eq:r-window}--\eqref{eq:d-window}. In each comparison
-the lower-endpoint slack is $\zeta-\tau>0$ and the upper-endpoint slack
-is $\tau>0$. This proves the proposition.
+The closed intervals used for $r$ and $u$ lie strictly inside
+\eqref{eq:r-window} and \eqref{eq:u-window}; their lower-endpoint slack is
+$\zeta-\tau>0$ and their upper-endpoint slack is $\tau>0$. For the last
+divisor, write
+\[
+ T=2\log_xr+2-\gamma-4\log_xq.
+\]
+The constructed interval is
+\[
+ [T-101\tau-\delta,T-101\tau].
+\]
+It lies strictly inside \eqref{eq:d-window}, with lower and upper slacks
+$\zeta-49\tau>0$ and $49\tau>0$. This proves the proposition.
 \end{proof}
 
 \section{Verification of the distribution hypotheses}\label{sec:distribution}
 We use the coefficient-sequence and Siegel--Walfisz conventions of
-\cite[Definitions~6--9]{Stadlmann26}. In particular,
-$\HH(\xi_1,\xi_2,\xi_3)$ denotes the convolution family in Definition~9
-of that paper. Its Type~I sequences have a smooth factor at scale
-$x^\gamma$ with $\gamma\ge\xi_1-\eta$. Its Type~II sequences have two
-Siegel--Walfisz factors, one at scale $x^\gamma$ with
+\cite[Definitions~6--9]{Stadlmann26}.  We shall only need the Type~II
+and Type~III members of the convolution family in Definition~9 of that
+paper.  Its Type~II sequences have two Siegel--Walfisz factors, one at
+scale $x^\gamma$ with
 $\xi_2-\eta\le\gamma\le1-\xi_2+\eta$. The Type~III scales satisfy the
 conditions in that definition. We retain all of its coefficient bounds
 and uniformity conventions.
+
+The following reduction derives the required prime-supported estimate from
+the Type~II and Type~III distribution estimates.
+
+\begin{lemma}[Endpoint Heath--Brown reduction]\label{lem:HB-reduction}
+Let $\mathcal R(x)$ be a family of squarefree moduli satisfying
+\[
+ x^{1/2-2\tau}\le q\le x^{1/2+2\omega}\qquad(q\in\mathcal R(x)).
+\]
+Suppose that, for every primitive residue class $a$, with arbitrary
+logarithmic saving and uniformly in the coefficient sequences, the
+discrepancy sum over $\mathcal R(x)$ is bounded by $x(\log x)^{-C}$ for
+\begin{enumerate}
+\item every Type~II convolution in $\HH(\xi_1,2/5,2/5)$, and
+\item every Type~III convolution in $\HH(\xi_1,2/5,2/5)$.
+\end{enumerate}
+If $\omega<1/20$ and $0<\tau\le10^{-8}$, then the same conclusion
+holds for $\rho_x$.
+\end{lemma}
+\begin{proof}
+We adapt the proof of \cite[Lemma~2.7 and Section~3]
+{PolymathDistribution}, retaining only the alternatives that are needed
+at the endpoint $2/5$.  Put
+\[
+ \sigma=\frac1{10}+\frac\eta4.
+\]
+Thus $\sigma>1/10$ and, for our parameters, $\sigma>2\omega$.
+Apply the Heath--Brown identity with $K=10$, for which $1/K<2\sigma$,
+followed by the finer-than-dyadic smooth decomposition
+used in \cite[Section~3]{PolymathDistribution}.  Up to
+$O((\log x)^{O(1)})$ terms, whose number is absorbed by the arbitrary
+logarithmic saving, this reduces the von Mangoldt function on $[x,2x]$
+to convolutions
+\[
+ \alpha_1\star\cdots\star\alpha_s
+\]
+at scales $N_i=x^{t_i+o(1)}$, where $t_i\ge0$ and
+$\sum_i t_i=1$.  By \cite[Lemma~3.4]{PolymathDistribution}, every
+subconvolution at a scale $x^c$ with fixed $c>0$ has the
+Siegel--Walfisz property, and every individual factor at scale at least
+$x^{2\sigma}$ is smooth.  Choose the smooth decomposition sufficiently
+fine that all $o(1)$ endpoint errors below are smaller than $\eta/4$.
+
+Apply \cite[Lemma~3.1]{PolymathDistribution} to the $t_i$.  In its
+Type~I/II alternative there is a partition into two groups, the smaller
+of which has exponent $\gamma$ satisfying
+\[
+ \frac12-\sigma+o(1)<\gamma\le\frac12.
+\]
+Both grouped convolutions are Siegel--Walfisz, and
+\[
+ \frac12-\sigma=\frac25-\frac\eta4>\frac25-\eta.
+\]
+Consequently this is a Type~II convolution from the family in the
+statement.
+
+In the Type~III alternative there are three distinct smooth factors
+with exponents $t_i,t_j,t_k$ satisfying
+\[
+ 2\sigma\le t_i,t_j,t_k\le\frac12-\sigma,
+ \qquad t_i+t_j,t_i+t_k,t_j+t_k\ge\frac12+\sigma.
+\]
+The identities
+\[
+ 2\sigma=\frac15+\frac\eta2,qquad
+ \frac12-\sigma=\frac25-\frac\eta4,qquad
+ \frac12+\sigma=\frac35+\frac\eta4
+\]
+place this convolution strictly inside the Type~III ranges for
+$\xi_3=2/5$, even after the endpoint errors.  It is therefore covered
+by the second hypothesis.
+
+It remains to treat the Type~0 alternative. Write the convolution as
+\[
+ F=\alpha\star\beta,\qquad
+ \alpha(m)=\psi(m/N),\qquad
+ N\ge x^{1/2+\sigma+o(1)},\qquad M\asymp x/N,
+\]
+where $\beta$ is the complementary coefficient sequence at scale $M$ and
+$\psi$ has the smoothness bounds furnished by Lemma~3.4 of that paper.
+For primitive $a\pmod q$, terms with $(\ell,q)>1$ vanish from both sides
+of the discrepancy, and hence
+\begin{multline*}
+ E_F(x;q,a)=\sum_{(\ell,q)=1}\beta(\ell)\left(
+ \sum_{\substack{x/\ell\le m\le2x/\ell\\
+                  m\equiv a\bar\ell\pmod q}}\alpha(m)\right.\\
+ \left.{}-\frac1{\phi(q)}
+ \sum_{\substack{x/\ell\le m\le2x/\ell\\(m,q)=1}}\alpha(m)
+ \right).
+\end{multline*}
+For fixed $\ell$, the function
+\[
+ g_\ell(t)=\psi(t/N)\ind_{[x/\ell,2x/\ell]}(t)
+\]
+has supremum and total variation bounded by $(\log x)^{O(1)}$.
+Euler summation in a residue class, and M\"obius inversion for the
+coprimality condition, therefore bound the expression in parentheses by
+\[
+ \tau(q)(\log x)^{O(1)}=x^{o(1)}.
+\]
+Since $\sum_\ell|\beta(\ell)|\ll M(\log x)^{O(1)}$ and
+$\#\mathcal R(x)\le x^{1/2+2\omega}$, we obtain
+\[
+ \sum_{q\in\mathcal R(x)}|E_F(x;q,a)|
+ \ll x^{1/2+2\omega}M(\log x)^{O(1)}
+ \ll x^{1-\sigma+2\omega+o(1)}.
+\]
+This is $O_C(x(\log x)^{-C})$ for every $C$, because
+$\sigma>2\omega$. We have proved the required distribution estimate for
+$\Lambda$ with the cutoff included.
+
+Finally remove prime powers.  On primes,
+$\Lambda(n)=\log n$, while the difference is supported on $p^j$ with
+$j\ge2$.  Uniformly for primitive $a$, squarefreeness gives at most
+$2^{\#\{p:p\mid q\}}$ roots to $z^2\equiv a\pmod q$.  Hence the total progression
+contribution of prime squares, summed over
+$x^{1/2-2\tau}\le q\le x^{1/2+2\omega}$, is
+\[
+ \ll x^{1/2+2\omega+2\tau+o(1)}.
+\]
+For $j\ge3$, the crude bound of $O(x^{1/3})$ possible bases for each
+modulus gives
+\[
+ \ll x^{5/6+2\omega+o(1)}.
+\]
+The averaged main terms contribute only $x^{1/2+o(1)}$, using
+$\sum_{q\le Q}\phi(q)^{-1}\ll\log Q$.  All three bounds are
+$O_C(x(\log x)^{-C})$ for every $C$.  Dividing by $\log(3x)$ and using
+\eqref{eq:rho} proves the assertion for $\rho_x$.
+\end{proof}
 
 \begin{proposition}\label{prop:distribution}
 The parameters \eqref{eq:parameters} satisfy
@@ -490,7 +640,8 @@ The parameters \eqref{eq:parameters} satisfy
 Fix $\varepsilon_0>0$ and a required logarithmic saving. Choose $\tau>0$
 sufficiently small for the distribution estimates below, with
 $\tau\le\tmax$. The subfamily $q<x^{1/2-2\tau}$ is covered directly,
-for the prime indicator, by the Bombieri--Vinogradov theorem. We therefore
+for $\rho_x$, by the Bombieri--Vinogradov theorem for $\Lambda$, removal
+of prime powers, and division by $\log(3x)$. We therefore
 work on
 \[
  \Qset^+=\{q\in\Qset(x;\varepsilon_0):q\ge x^{1/2-2\tau}\}.
@@ -500,50 +651,10 @@ The smooth prime logarithms are less than $\delta$, and the total
 logarithm of $q$ is at least $1/2-2\tau$.
 
 We verify the divisor conditions of
-\cite[Lemmas~3--7]{Stadlmann26}. All inequalities used for this purpose
+\cite[Lemmas~3, 4, 6, and~7]{Stadlmann26}. All inequalities used for this purpose
 are strict. The numerical comparisons in this proof are rational
 comparisons, not floating-point tests; the exact checks are recorded in
 Appendix~\ref{app:certificate}.
-
-\subsection*{Type I}
-Suppose first that $\xi_1-\eta\le\gamma\le1/2$. Set
-\[
- \Delta_I(\gamma)=\gamma-4\omega-\frac13-\eta.
-\]
-Then
-\[
- \Delta_I(\gamma)>\delta,\qquad
- 3\gamma-12\omega-3\Delta_I(\gamma)=1+3\eta>1.
-\]
-To apply \cite[Lemma~5]{Stadlmann26}, we require a divisor with logarithm
-in
-\[
- (\gamma-3\tau-\Delta_I(\gamma),\ \gamma-3\tau).
-\]
-Put all large factors in this divisor and fill with smooth primes.
-The initial logarithm is strictly less than the upper endpoint, because
-\begin{equation}\label{eq:I-cap}
- 2B<\xi_1-\eta-3\tmax.
-\end{equation}
-The total available logarithm exceeds the lower endpoint, since
-\[
- \frac12-2\tau-\bigl(\gamma-3\tau-\Delta_I(\gamma)\bigr)
- =\frac16-4\omega-\eta+\tau>0.
-\]
-Lemma~\ref{lem:fill} supplies the required divisor.
-
-For $1/2<\gamma\le1/2+2\omega+\tau$, use
-\[
- \Delta_{I,h}=\frac{1-68\omega}{14}-\eta>\delta.
-\]
-Now $68\omega+14\Delta_{I,h}=1-14\eta<1$, and the required interval is
-\[
- (1-\gamma-3\tau-\Delta_{I,h},\ 1-\gamma-3\tau).
-\]
-The same construction works: its upper endpoint exceeds $2B$, by
-$2B<1/2-2\omega-4\tmax$, and the total logarithm exceeds its lower
-endpoint. For $\gamma>1/2+2\omega+\tau$, the last case of
-\cite[Lemma~5]{Stadlmann26} requires no divisor condition.
 
 \subsection*{Type IIa and Type IIb}
 Normalize the auxiliary scales so that $MN=x$; this changes $M$ by
@@ -652,27 +763,14 @@ Fill with smooth primes and apply Lemma~\ref{lem:fill}.
 
 \subsection*{Passage to primes}
 We have obtained the required distribution estimate on $\Qset^+$ for
-every convolution in $\HH(\xi_1,\xi_2,\xi_3)$. The constants and auxiliary
-parameters can be chosen uniformly on the indicated ranges: the scalar
-inequalities have positive margins, and the cutoff ranges have the
-fixed tolerance $\eta$. The bound \eqref{eq:qmaximum} places every
-modulus within $x^{1/2+2\omega}$.
-
-The parameters satisfy
-\[
- 2\xi_1+3\xi_2<2,\quad \xi_2\le\xi_3,\quad
- \xi_1+9\xi_2<4,\quad 2\xi_1+\xi_2>1,\quad17\xi_2<7.
-\]
-Apply the decomposition of \cite[Proposition~2]{Stadlmann26} to
-$\Qset^+$. Its proof applies to this restricted subfamily: the
-convolution decomposition does not depend on the modulus, and its error
-estimates are sums of absolute discrepancies, so restricting the outer
-sum preserves every estimate. Since $\xi_2=2/5$, the two discarded sums
-in that proposition are empty and $\rho=\ind_\PP$. Indeed, in the first
-sum two exponents strictly greater than $1/5$ would have sum less than
-$2/5$; in the second an exponent would have to lie strictly between
-$1/5$ and $1/5$. There is consequently no mass loss and no negative
-minorant term. This proves \eqref{eq:prime-distribution} on $\Qset^+$.
+every Type~II and Type~III convolution required in
+Lemma~\ref{lem:HB-reduction}. The constants and auxiliary parameters can
+be chosen uniformly on the indicated ranges: the scalar inequalities
+have positive margins, and the cutoff ranges have the fixed tolerance
+$\eta$. The bound \eqref{eq:qmaximum} places every modulus within
+$x^{1/2+2\omega}$. Since $\omega=239/32768<1/20$,
+Lemma~\ref{lem:HB-reduction} proves \eqref{eq:prime-distribution} on
+$\Qset^+$.
 Combining it with Bombieri--Vinogradov on the smaller moduli completes
 the proof.
 \end{proof}
@@ -982,7 +1080,7 @@ sums. The recorded pair endpoints are in
 The six margins in \eqref{eq:uniform-one}--\eqref{eq:uniform-two}
 exceed, in their displayed order,
 \[
- (0.0001580,\ 0.0000756,\ 0.0001434,\ 0.02725,\ 0.0001891,\ 0.0001879).
+ (0.0001576,\ 0.0000751,\ 0.0001434,\ 0.02725,\ 0.0001891,\ 0.0001869).
 \]
 These terminating decimals are strict rational lower bounds. All
 parameter comparisons in Section~\ref{sec:distribution} are checked by
@@ -1002,8 +1100,8 @@ materials, and gave brief, high-level instructions,
 including the instruction to seek the strongest reduction it could support.
 GPT-5.6 Sol generated the principal mathematical argument, parameter search,
 manuscript text, certificate data, and verification software. Codex was used
-afterward to inspect the release package and rerun its computational
-checks.
+afterward to inspect the release package, rerun its computational checks, and
+assist with verification and preparation of the final text.
 
 There has been no human verification of this work to date.
 
